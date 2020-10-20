@@ -14,16 +14,24 @@
 <!-- MAIN DIV START -->
 <div class="mainDiv">
     <!-- CALORIES DIV -->
-        <div class="card">
-            <p>Calories Left for Today:</p>
-            <p>130g Protein 150g Carbs 40g Fats</p> 
+        <div class="card" id="caloriesDiv">
+            <p>Macros Left for Today:</p>
+            <div class="macros">
+                <div class="protein"></div>
+                <div class="carbs"></div>
+                <div class="fats"></div>
+            </div>
             <ul>
-                <li>Breakfast</li>
             </ul>
-            <button>Add Calories</button>
+            <form class="form-container" id="caloriesInput">
+                <input type="text" placeholder="Enter Protein" name="protein" >
+                <input type="text" placeholder="Enter Carbs" name="carbs" >
+                <input type="text" placeholder="Enter Fats" name="fats" >
+                <button type="submit" id="log-macros" class="log-macros">Log Entry</button>
+            </form>
         </div>
     <!-- WORKOUT DIV -->
-    <div id="workout" class="card">
+    <div id="workoutDiv" class="card">
         <p>Calories Left for Today:</p>
         <p>130g Protein 150g Carbs 40g Fats</p> 
         <ul class="exerciseList">
@@ -41,7 +49,7 @@
         <form class="form-container" id="weightInput">
             <input type="text" placeholder="Enter Current Weight" name="currentweight" >
             <input type="text" placeholder="Enter Image URL" name="img">
-            <button type="submit" id="log-entry">Log Entry</button>
+            <button type="submit" id="log-entry" class="log-entry">Log Entry</button>
         </form>
     </div>
 </div>

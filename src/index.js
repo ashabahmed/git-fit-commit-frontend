@@ -44,10 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		<p>Current Weight: ${user.currentWeight.slice(-1)} lbs.</p>
 		<p>Pounds Lost: ${user.startingWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
 		<p>Pounds Left: ${user.goalWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
-
-
 		`
-
 		const weightUl = document.querySelector(".weightUl")
 		const newLi = document.createElement("li")
 		let d = new Date()
@@ -60,28 +57,40 @@ document.addEventListener("DOMContentLoaded", function() {
 	const submitHandler = () => {
 		document.addEventListener('submit', e => {
 			e.preventDefault()
+			if(e.target.matches("#weightInput")) {
+				console.log(e.target)
+				const weightForm = document.getElementById('weightInput')
+				const currentWeight = weightForm.currentweight.value
+				const weightInfo = {currentWeight: currentWeight}
+				weightForm.reset()
+
+				const options = {
+					method: "POST",
+					headers: {
+						"content-type": "application/json",
+						"accept": "application/json"
+					},
+					body: JSON.stringify(weightInfo)
+				}
+
+				fetch(userUrl, options)
+				.then(response => response.json())
+				.then(getUser())
+			} else if(e.target.matches("#caloriesInput")) {
 			
-			const weightForm = document.getElementById('weightInput')
-			const currentWeight = weightForm.currentweight.value
-			
+				const macrosForm = document.getElementById('caloriesInput')
+				const proteinInput = macrosForm.protein.value
+				const carbsInput = macrosForm.carbs.value
+				const fatsInput = macrosForm.fats.value
+				macrosForm.reset()
 
-			const weightInfo = {currentWeight: currentWeight}
-
-			weightForm.reset()
-
-			const options = {
-				method: "POST",
-				headers: {
-					"content-type": "application/json",
-					"accept": "application/json"
-				},
-				body: JSON.stringify(weightInfo)
+				updateMacros(proteinInput, carbsInput, fatsInput)
 			}
-
-			fetch(userUrl, options)
-			.then(response => response.json())
-			.then(getUser())
 		})
+	}
+
+	const updateMacros = (proteinInput, carbsInput, fatsInput) => {
+		console.log(proteinInput)
 	}
 
 	// const clickHandler = () => {
