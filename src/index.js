@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
 	const exUrl = "http://localhost:3000/exercises/"
-	const userUrl = "http://localhost:3000/users/4"
+	const userUrl = "http://localhost:3000/users/1"
 
 		
 	// const getExercises = () => {
@@ -41,14 +41,18 @@ document.addEventListener("DOMContentLoaded", function() {
 		const stats = document.querySelector(".weightStats")
 		stats.innerHTML = `
 		<p>Goal Weight: ${user.goalWeight} lbs.</p>
-		<p>Current Weight: ${user.currentWeight} lbs.</p>
+		<p>Current Weight: ${user.currentWeight.slice(-1)} lbs.</p>
+		<p>Pounds Lost: ${user.startingWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
+		<p>Pounds Left: ${user.goalWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
+
+
 		`
 
 		const weightUl = document.querySelector(".weightUl")
 		const newLi = document.createElement("li")
 		let d = new Date()
 		let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Oct.", "November", "December"]
-		newLi.innerHTML = `${months[d.getMonth()]} ${d.getDate()}`
+		newLi.innerHTML = `${months[d.getMonth()]} ${d.getDate()} ${user.currentWeight[0]}`
 
 		weightUl.appendChild(newLi)
 	}
@@ -61,12 +65,12 @@ document.addEventListener("DOMContentLoaded", function() {
 			const currentWeight = weightForm.currentweight.value
 			
 
-			const weightInfo = {"currentWeight": currentWeight}
+			const weightInfo = {currentWeight: currentWeight}
 
 			weightForm.reset()
 
 			const options = {
-				method: "PATCH",
+				method: "POST",
 				headers: {
 					"content-type": "application/json",
 					"accept": "application/json"
@@ -80,9 +84,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		})
 	}
 
-	const clickHandler = () => {
+	// const clickHandler = () => {
 
-	}
+	// }
 
 	getUser();
 	submitHandler();
