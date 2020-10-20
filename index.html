@@ -8,7 +8,7 @@
 </head>
 <body>
 <!-- NAV BAR -->
-<h1> Git Fit. Git Commit. </h1>
+<h1 style="text-align:center"> Git Fit. Git Commit. </h1>
 
 
 <!-- MAIN DIV START -->
@@ -31,6 +31,19 @@
         <button>Add Calories</button>
     </div>
     <!-- WEIGHT TRACKER DIV -->
+    <div id="weightTracker" class="card">
+        <h2> Weight Tracker: </h2>
+        <div class="weightStats">
+        </div>
+        <div class="weightUl">
+        <ul></ul>
+        </div>
+        <form class="form-container" id="weightInput">
+            <input type="text" placeholder="Enter Current Weight" name="currentweight" >
+            <input type="text" placeholder="Enter Image URL" name="img">
+            <button type="submit" id="log-entry">Log Entry</button>
+        </form>
+    </div>
 </div>
 <!-- MAIN DIV END -->
 
@@ -40,5 +53,6 @@
 
 
   <script type="text/javascript" src="src/index.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>
