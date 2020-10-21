@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
 	const exUrl = "http://localhost:3000/exercises/"
-	const userUrl = "http://localhost:3000/users/1"
+	const userUrl = "http://localhost:3000/users/22"
 
 		
 	// const getExercises = () => {
@@ -55,6 +55,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		// `
 
 		// weightUl.append(newLi)
+
+		const nav = document.querySelector("#navBar")
+		nav.innerHTML = `
+		<h1 class="container p-5 my-3 bg-dark text-white"> Git Fit. Git Commit. </h1>
+		<h1 class="container p-5 my-3 bg-dark text-white">Hi ${user.name}</h1>
+		`
 	}
 
 	const submitHandler = () => {

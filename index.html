@@ -8,11 +8,12 @@
 </head>
 <body>
 <!-- NAV BAR -->
-<h1 class="container p-3 my-3 bg-dark text-white"> Git Fit. Git Commit. </h1>
-
-
+<div id="navBar">
+</div>
 <!-- MAIN DIV START -->
 <div class="mainDiv">
+	<div class="card-deck">
+
     <!-- CALORIES DIV -->
         <div class="card" id="caloriesDiv">
             <h2>Macro Tracker:</h2>
@@ -32,9 +33,9 @@
             </form>
         </div>
     <!-- WORKOUT DIV -->
-    <!-- <div id="workoutDiv" class="card">
-        
-    </div> -->
+    <div id="workoutDiv" class="card">
+			<h2>Workout Tracker:</h2>
+    </div>
     <!-- WEIGHT TRACKER DIV -->
     <div id="weightTracker" class="card">
         <h2> Weight Tracker: </h2>
@@ -53,7 +54,8 @@
             <input type="text" placeholder="Enter Image URL" name="img">
             <button type="submit" id="log-entry" class="btn">Log Weight</button>
         </form>
-    </div>
+		</div>
+		</div>
 </div>
 <!-- MAIN DIV END -->
 <!-- Make initial form for welcome page, so user can enter details -->
