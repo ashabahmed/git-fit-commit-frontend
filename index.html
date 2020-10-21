@@ -8,7 +8,7 @@
 </head>
 <body>
 <!-- NAV BAR -->
-<nav id="navBar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav id="navBar" class="navbar navbar-expand-xl navbar-dark bg-dark" style="padding-left: 40px;">
   <a class="navbar-brand" href="#">Git Fit. Git Commit.</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -37,7 +37,94 @@
     </form> -->
   </div>
 </nav>
+<!-- INITIAL FORM START -->
+<br>
+<div>
+	<div id="intro" style="padding-left: 40px;" >
+		<form id="mainForm">
+			<div class="form-group row">
+				<label for="inputName" class="col-sm-2 col-form-label">Name</label>
+					<div class="col-sm-10">
+					<input type="name" class="form-control" id="inputName" placeholder="Name">
+					</div>
+			</div>
+			<fieldset class="form-group">
+				<div class="row">
+					<legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+						<div class="col-sm-10">
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="male" id="male" value="male">
+								<label class="form-check-label" for="gridRadios1">
+								Male
+								</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio" name="female" id="female" value="female">
+								<label class="form-check-label">
+								Female
+								</label>
+							</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="skillLevel">Skill Level</label>
+				<select class="form-control" id="skillLevelInput">
+					<option>Beginner</option>
+					<option>Intermediate</option>
+					<option>Advanced</option>
+				</select>
+			</div>
+			</fieldset>
+				<div class="form-group row">
+					<div class="col-sm-2">Equipment</div>
+						<div class="col-sm-10">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="bodyWeight" value="Body Weight">
+								<label class="form-check-label" for="gridCheck1">
+									Body Weight
+								</label>
+							</div>
+
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="gridCheck1">
+								<label class="form-check-label" for="gridCheck1">
+									Dumbbell
+								</label>
+							</div>
+
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="gridCheck1">
+								<label class="form-check-label" for="gridCheck1">
+									Bar
+								</label>
+							</div>
+
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="gridCheck1">
+								<label class="form-check-label" for="gridCheck1">
+									Band
+								</label>
+							</div>
+
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="gridCheck1">
+								<label class="form-check-label" for="gridCheck1">
+									Gym
+								</label>
+							</div>
+
+						</div>
+				</div>
+			<div class="form-group row">
+				<div class="col-sm-10">
+					<button type="submit" class="btn btn-primary">Sign in</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 <!-- MAIN DIV START -->
+
 <div class="flex-container">
 	<div class="card-deck">
 		<!-- CALORIES DIV -->
@@ -56,13 +143,14 @@
 										<input class="col" type="text" placeholder="Protein" name="protein" >
 										<input class="col"type="text" placeholder="Carbs" name="carbs" >
 										<input class="col"type="text" placeholder="Fats" name="fats" >
-										<button class="col" type="submit" id="log-macros" class="btn">Log Macros</button>
+										<button class="btn btn-info" type="submit" id="log-macros">Log Macros</button>
 								</form>
 						</div>
 			</div>
 		<!-- WORKOUT DIV -->
 			<div  class="card" style="margin-top: 50px;">
 				<div id="workoutDiv" class="card-body">	
+
 				</div>
 			</div>
 		<!-- WEIGHT TRACKER DIV -->
@@ -82,7 +170,11 @@
 						<form class="form-row" id="weightInput" >
 							<input class="col" type="text" placeholder="Current Weight" name="currentweight" >
 							<input class="col" type="text" placeholder="Image URL" name="img">
-							<button class="col" type="submit" id="log-entry" class="btn">Log Weight</button>
+							<div class="custom-file">
+								<input type="file" class="custom-file-input" id="customFile">
+								<label class="custom-file-label" for="customFile">Choose file</label>
+							</div>
+							<button class="btn btn-info" type="submit" id="log-entry">Log Weight</button>
 						</form>
 					</div>
 				</div>
@@ -94,10 +186,21 @@
 		
 	</div>
 <br><br><br><br>
+
+<!-- EXERCISE INFO DIV -->
+<div id="exerciseInfo" style="width: min-content; margin-left: 50px;"">
+	<ul class="pagination pagination-sm">
+		<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+		<li class="page-item"><a class="page-link" href="#">1</a></li>
+		<li class="page-item"><a class="page-link" href="#">2</a></li>
+		<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item"><a class="page-link" href="#">Next</a></li>
+	</ul>
+</div>
+<br><br><br><br>
 <!-- MAIN DIV END -->
 	
 <!-- FOOTER DIV -->
-
 
 
 <script type="text/javascript" src="src/index.js"></script>

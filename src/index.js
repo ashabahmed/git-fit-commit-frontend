@@ -1,8 +1,26 @@
+
+
 document.addEventListener("DOMContentLoaded", function() {
 	const exUrl = "http://localhost:3000/exercises/"
-	const userUrl = "http://localhost:3000/users/23"
+	const userUrl = "http://localhost:3000/users/24"
 
-		
+	let d = new Date()
+	
+	let weekday = new Array(7);
+	weekday[0] = "Sunday";
+	weekday[1] = "Monday";
+	weekday[2] = "Tuesday";
+	weekday[3] = "Wednesday";
+	weekday[4] = "Thursday";
+	weekday[5] = "Friday";
+	weekday[6] = "Saturday";
+
+	let n = weekday[d.getDay()];
+	
+	let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Oct.", "November", "December"]
+
+	const exerciseInfoDiv = document.getElementById('exerciseInfo')
+	
 	const getExercises = () => {
 		fetch(userUrl)
 		.then(response => response.json())
@@ -11,55 +29,49 @@ document.addEventListener("DOMContentLoaded", function() {
 		})
 	}
 
-	// Here are different ways we can do this workout tracker
-	/*
-		dynamically select exercises for each different user based on their equpiment attribute will select 
-		the equipment select will return a colleciton of worksout that use that equipment 
-						Also filter tthrough diffculity level no matter the equipment?
-		collection will have a lot of exercises that can be shuffled through the week,
-		each card will show the work outs for that day only 
-		different days will select random exercises for that day from collection 	
-		we can do this by doing an if statement to figure out the day			
-
-		each exercise will list number of sets and reps for each exercise
-		some exercise sets will be time based and not rep based
-
-		on exercise click we can render that specific exercise and all it's details(gif, description, insturction, notes)
-		we can get the id of the exercise and set it to the dataset id number for the p tag of the exercise
-
-	*/
-
 
 	const random_exercises = items => {
 		return items[Math.floor(Math.random()*items.length)]
 	}
 
 	const renderUserExercises = user => {
-		const userExercises = user.exercises
-		const fullBody = userExercises.filter(exercise => exercise.majorMuscle.includes("Full Body"))
-		const core = userExercises.filter(exercise => exercise.majorMuscle.includes("Core"))
-		const legs = userExercises.filter(exercise => exercise.majorMuscle.includes("Legs"))
-		const arms = userExercises.filter(exercise => exercise.majorMuscle.includes("Arms"))
+		if(n === "Wednesday"){
+			const fullBody = user.exercises.filter(exercise => exercise.majorMuscle.includes("Full Body"))
+			const core = user.exercises.filter(exercise => exercise.majorMuscle.includes("Core"))
+			const legs = user.exercises.filter(exercise => exercise.majorMuscle.includes("Legs"))
+			const arms = user.exercises.filter(exercise => exercise.majorMuscle.includes("Arms"))
+	
+	
+			const workoutDiv = document.querySelector("#workoutDiv")
+			const workout = document.createElement("div")
+			const fullBodysample1 = random_exercises(fullBody)
+			const armsSample = random_exercises(arms)
+			const legsSample = random_exercises(legs)
+			const coreSample = random_exercises(core)
+			const fullBodysample2 = random_exercises(fullBody)
+	
+			
+			workoutDiv.innerHTML = `
+			<h2 class="card-title">Workout Tracker:</h2>
+			<h3 style="text-align:center;">${n}</h3>
+			<br>
+			<p class="workout-p" data-exercise-id="${fullBodysample1.id}"><b class="workout-p" data-exercise-id="${fullBodysample1.id}">${fullBodysample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> Done.
+			<p class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> Done.
+			<p class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> Done.
+			<p class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p> <input type="checkbox" id="accept"> Done.
+			<p class="workout-p" data-exercise-id="${fullBodysample2.id}"><b class="workout-p" data-exercise-id="${fullBodysample2.id}">${fullBodysample2.exercise}</b>: 1 Set until failure </p> <input type="checkbox" id="accept"> Done.
+			<br>
+			<ul class="pagination pagination-sm">
+			<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+	
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+		</ul>
+			`
+			workoutDiv.appendChild(workout)
+		} else {
+			console.log("REST DAY!!")
+		}
 
-
-		const workoutDiv = document.querySelector("#workoutDiv")
-		const workout = document.createElement("div")
-		const fullBodysample1 = random_exercises(fullBody)
-		const armsSample = random_exercises(arms)
-		const legsSample = random_exercises(legs)
-		const coreSample = random_exercises(core)
-		const fullBodysample2 = random_exercises(fullBody)
-
-		
-		workoutDiv.innerHTML = `
-		<h2 class="card-title">Workout Tracker:</h2>
-		<p class="><b>${fullBodysample1.exercise}</b>: 3 Sets - 6-10 Reps each </p>
-		<p><b>${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p>
-		<p><b>${legsSample.exercise}</b>: 2 Sets - 6-10 Reps each </p>
-		<p><b>${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p>
-		<p><b>${fullBodysample2.exercise}</b>: 1 Set until failure </p>
-		`
-		workoutDiv.appendChild(workout)
 
 		
 		// for(const exercise of exercises) {
@@ -112,7 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				.then(data => {
 					const currentWeightArray = data.currentWeight
 					currentWeightArray.push(currentWeight)
-					console.log(currentWeightArray)
 					addCurrentWeight(currentWeightArray)
 					
 				})
@@ -126,6 +137,10 @@ document.addEventListener("DOMContentLoaded", function() {
 				macrosForm.reset()
 
 				updateMacros(proteinInput, carbsInput, fatsInput)
+			} else if(e.target.matches("#mainForm")) {
+				
+				
+				console.log(e.target)
 			}
 		})
 	}
@@ -153,8 +168,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	const addCurrentWeightLi = (user) => {
 		const weightUl = document.querySelector(".weightUl")
 		const newLi = document.createElement("li")
-		let d = new Date()
-		let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Oct.", "November", "December"]
+
 		newLi.innerHTML = `
 		<b>${months[d.getMonth()]} ${d.getDate()}:</b> ${user.currentWeight.slice(-1)} lbs.
 		`
@@ -193,6 +207,46 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 	}
 
+	const clickHandler = () => {
+		document.addEventListener('click', e =>{
+			if(e.target.matches(".workout-p")){
+				const workout = e.target
+				const exerciseId = workout.dataset.exerciseId
+				
+				fetch(exUrl + exerciseId)
+				.then(response => response.json())
+				.then(exercise => {
+					renderExerciseInfo(exercise)
+				})
+			}
+		})
+
+	}
+
+	const renderExerciseInfo = exercise => {
+		exerciseInfoDiv.classList.add("card")
+		exerciseInfoDiv.innerHTML = `
+		<img src="${exercise.example}">
+		<p>${exercise.exercise}</p><br>
+		<p>${exercise.exerciseType}</p><br>
+		<p>${exercise.equipment}</p><br>
+		<p>${exercise.majorMuscle}</p><br>
+		<p>${exercise.minorMuscle}</p><br>
+		<p>${exercise.notes}</p><br>
+		`
+
+
+	}
+
+
+
+	clickHandler();
+	getUser();
+	submitHandler();
+	getExercises();
+})
+
+
 
 		// <!-- Workout Card is going provide exercises and workout regime for the week.  -->
 		// Make a function that renders all the user's exercises based off equipment.
@@ -205,7 +259,20 @@ document.addEventListener("DOMContentLoaded", function() {
 	// <!-- Make sure all the stuff that's entered as form input saves to user's DB -->
 	// <!-- Name of exercise will be clickable and lead to that workout's details, gif, and instructions -->
 
-	getUser();
-	submitHandler();
-	getExercises();
-})
+		// Here are different ways we can do this workout tracker
+	/*
+		dynamically select exercises for each different user based on their equpiment attribute will select 
+		the equipment select will return a colleciton of worksout that use that equipment 
+						Also filter tthrough diffculity level no matter the equipment?
+		collection will have a lot of exercises that can be shuffled through the week,
+		each card will show the work outs for that day only 
+		different days will select random exercises for that day from collection 	
+		we can do this by doing an if statement to figure out the day			
+
+		each exercise will list number of sets and reps for each exercise
+		some exercise sets will be time based and not rep based
+
+		on exercise click we can render that specific exercise and all it's details(gif, description, insturction, notes)
+		we can get the id of the exercise and set it to the dataset id number for the p tag of the exercise
+
+	*/
