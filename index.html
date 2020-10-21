@@ -4,65 +4,98 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css" />
-  <title>Document</title>
+  <title>Git Fit. Git Commit.</title>
 </head>
 <body>
 <!-- NAV BAR -->
-<div id="navBar">
-</div>
-<!-- MAIN DIV START -->
-<div class="mainDiv">
-	<div class="card-deck">
+<nav id="navBar" class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Git Fit. Git Commit.</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <!-- CALORIES DIV -->
-        <div class="card" id="caloriesDiv">
-            <h2>Macro Tracker:</h2>
-            <p>Macros Left for Today:</p>
-            <div class="macros">
-                <div class="protein"> 200g <b>Protein</b> </div>
-                <div class="carbs"> 140g <b>Carbs</b></div>
-                <div class="fats"> 65g <b>Fats</b></div>
-            </div>
-            <ul>
-            </ul>
-            <form class="form-container" id="caloriesInput">
-                <input type="text" placeholder="Enter Protein" name="protein" >
-                <input type="text" placeholder="Enter Carbs" name="carbs" >
-                <input type="text" placeholder="Enter Fats" name="fats" >
-                <button type="submit" id="log-macros" class="btn">Log Macros</button>
-            </form>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Exercises
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
         </div>
-    <!-- WORKOUT DIV -->
-    <div id="workoutDiv" class="card">
-			<h2>Workout Tracker:</h2>
-    </div>
-    <!-- WEIGHT TRACKER DIV -->
-    <div id="weightTracker" class="card">
-        <h2> Weight Tracker: </h2>
-        <div class="weightStats">
-        </div>
-        <div class="weightUl">
-        <p><b>Recent Entries:</b></p>
-        <ul>
-            <li><b>Aug. 31:</b> 160lbs</li>
-            <li><b>Oct. 6:</b> 156lbs</li>
-            <li><b>Oct. 13:</b> 153lbs</li>
-        </ul>
-        </div>
-        <form class="form-container" id="weightInput" >
-            <input type="text" placeholder="Enter Current Weight" name="currentweight" >
-            <input type="text" placeholder="Enter Image URL" name="img">
-            <button type="submit" id="log-entry" class="btn">Log Weight</button>
-        </form>
-		</div>
-		</div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Calculate Macros</a>
+      </li>
+    </ul>
+    <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+  </div>
+</nav>
+<!-- MAIN DIV START -->
+<div class="flex-container">
+	<div class="card-deck">
+		<!-- CALORIES DIV -->
+			<div class="card" style="width: 18rem; margin-left: 50px; margin-top: 50px;" id="caloriesDiv">
+						<div class="card-body">	
+							<h1 class="card-title">Macro Tracker:</h1>
+								<h3 class="card-subtitle">Macros Left for Today:</h3>
+								<div class="macros">
+										<div class="protein"> 200g <b>Protein</b> </div>
+										<div class="carbs"> 140g <b>Carbs</b></div>
+										<div class="fats"> 65g <b>Fats</b></div>
+								</div>
+								<ul>
+								</ul>
+								<form class="form-row" id="caloriesInput">
+										<input class="col" type="text" placeholder="Protein" name="protein" >
+										<input class="col"type="text" placeholder="Carbs" name="carbs" >
+										<input class="col"type="text" placeholder="Fats" name="fats" >
+										<button class="col" type="submit" id="log-macros" class="btn">Log Macros</button>
+								</form>
+						</div>
+			</div>
+		<!-- WORKOUT DIV -->
+			<div  class="card" style="margin-top: 50px;">
+				<div id="workoutDiv" class="card-body">	
+				</div>
+			</div>
+		<!-- WEIGHT TRACKER DIV -->
+			<div id="weightTracker" class="card" style="width: 18rem; margin-right: 50px; margin-top: 50px;">
+				<div class="card-body">	
+					<h2> Weight Tracker: </h2>
+					<div class="weightStats">
+					</div>
+					<div>
+						<p><b>Recent Entries:</b></p>
+						<ul class="weightUl">
+							<li><b>Aug. 31:</b> 160lbs</li>
+							<li><b>Oct. 6:</b> 156lbs</li>
+							<li><b>Oct. 13:</b> 153lbs</li>
+						</ul>
+						</div>
+						<form class="form-row" id="weightInput" >
+							<input class="col" type="text" placeholder="Current Weight" name="currentweight" >
+							<input class="col" type="text" placeholder="Image URL" name="img">
+							<button class="col" type="submit" id="log-entry" class="btn">Log Weight</button>
+						</form>
+					</div>
+				</div>
+			</div>
 </div>
+<br><br><br><br>
+<!-- PROGRESS DIV -->
+	<div id="progressDiv">
+		
+	</div>
+<br><br><br><br>
 <!-- MAIN DIV END -->
-<!-- Make initial form for welcome page, so user can enter details -->
-<!-- based on that we can provide specified workouts -->
-<!-- Make sure all the stuff that's entered as form input saves to user's DB -->
-<!-- Workout Card is going provide exercises and workout regime for the week.  -->
-<!-- Name of exercise will be clickable and lead to that workout's details, gif, and instructions -->
+	
 <!-- FOOTER DIV -->
 
 
