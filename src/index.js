@@ -2,7 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 	const exUrl = "http://localhost:3000/exercises/"
-	const userUrl = "http://localhost:3000/users/"
+	const userUrl = "http://localhost:3000/users/1"
 
 	let d = new Date()
 	
@@ -22,11 +22,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	weekday[12] = "Friday";
 	weekday[13] = "Saturday";
 
-	let dayNum = 0;
-	let n = weekday[d.getDay() + dayNum];
-	let tomorrow = weekday[d.getDay() + 3]
-	let dayAfterTomorrow = weekday[d.getDay() + 4]
-	let threeDaysAfter = weekday[d.getDay() + 5]
+	
+	let n = weekday[d.getDay()];
+	let tomorrow = weekday[d.getDay() + 1]
+	let dayAfterTomorrow = weekday[d.getDay() + 2]
+	let threeDaysAfter = weekday[d.getDay() + 3]
 	
 	let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Oct.", "November", "December"]	
 	function addDarkmodeWidget() {
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	const getExercises = () => {
-		fetch(userUrl + 3)
+		fetch(userUrl)
 		.then(response => response.json())
 		.then(user => {
 			renderUserExercises(user)
@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			<h4 style="text-align:center;"> <b> Rest for 3 minutes after each set!</b> </h4>
 			<br>
 			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<br>
+			<br> no
 			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
 			<br>
 			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 2 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
@@ -183,7 +183,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample2.id}"><b class="workout-p" data-exercise-id="${fullBodySample2.id}">${fullBodySample2.exercise}</b>: 1 Set until failure </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
 			<br>
 
-			
 			`
 			workoutDiv.appendChild(workout)
 		} else if (n === "Friday"){
@@ -286,7 +285,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	// }
 
 	const getUser = () => {
-		fetch(userUrl + 3)
+		fetch(userUrl)
 		.then(response => response.json())
 		.then(user => {
 			renderName(user)
@@ -340,15 +339,17 @@ document.addEventListener("DOMContentLoaded", function() {
 				const age = form.age.value
 				const startingWeight = form.sw.value
 				const goalWeight = form.gw.value
-				const equipmentArray = []
 				const skillLevelDropDown = document.getElementById("skillLevelInput");
 				const skillLevel = skillLevelDropDown.value;
+				const equipmentArray = []
 				const sexArray = []
+
 				document.getElementsByName("sex").forEach(radio => {
 					if(radio.checked) {
 						sexArray.push(radio.value)
 					}
 				})
+
 
 				document.getElementsByName("equipment").forEach(radio => {
 					if(radio.checked) {
@@ -357,7 +358,9 @@ document.addEventListener("DOMContentLoaded", function() {
 				})
 				
 				const sexValue = sexArray[0]
+				const equipmentValue = equipmentArray[0]
 
+				form.reset()
 				const newUser = { 
 					name: name, 
 					sex: sexValue, 
@@ -367,7 +370,7 @@ document.addEventListener("DOMContentLoaded", function() {
 					goalWeight: goalWeight, 
 					macros: "protein",
 					skillLevel: skillLevel, 
-					equipment: equipmentArray }
+					equipment: equipmentValue }
 
 				const options = {
 					method: "PATCH",
@@ -378,10 +381,9 @@ document.addEventListener("DOMContentLoaded", function() {
 					body: JSON.stringify(newUser)
 				}
 
-				fetch(userUrl + 3, options)
+				fetch(userUrl, options)
 				.then(response => response.json())
-				.then(getUser())
-				
+				.then(getUser())	
 			}
 		})
 	}
@@ -453,19 +455,19 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 	}
 
-	const clickHandler = () => {
-		document.addEventListener('click', e =>{
-			if (e.target.matches("#next-btn")) {
-					dayNum += 1
+	// const clickHandler = () => {
+	// 	document.addEventListener('click', e =>{
+	// 		if (e.target.matches("#next-btn")) {
+	// 				dayNum += 1
 					
-				} else if (e.target.matches("#prev-btn")) {
-					dayNum -= 1
+	// 			} else if (e.target.matches("#prev-btn")) {
+	// 				dayNum -= 1
 					
-				}
+	// 			}
 
-		})
+	// 	})
 
-	}
+	// }
 
 	// if(e.target.matches(".workout-p")){
 	// 	const workout = e.target
@@ -515,7 +517,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		$('#exerciseModal').modal('show');
 	})
 
-	clickHandler();
+	// clickHandler();
 	submitHandler();
 	getExercises();
+	getUser();
 })
