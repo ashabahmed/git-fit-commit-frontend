@@ -19,4 +19,42 @@
   }
 }
 
+.col-sm {
+  color: black;
+  background-color: transparent;
+}
+
+div, p, h1, h2, h3, h4, a {
+  color: black;
+  background-color: transparent;
+}
+
+button {
+  background-color: whitesmoke;
+}
+
+/* :root {
+  --clr-light: #fdffc4;
+  --clr-dark: #00332a;
+  --clr-primary: #dbffa2;
+  --clr-secondary: #c3fcf2;
+  --clr-accent: #ff7750;
+
+  --foreground: var(--clr-dark);
+  --background: var(--clr-light);
+
+  --ff-title: "Playfair Display", serif;
+  --ff-body: "Assistant", sans-serif;
+}
+
+.darkmode {
+  --clr-light: #fdffc4;
+  --clr-dark: #00332a;
+  --clr-primary: #202302;
+  --clr-secondary: #00100d;
+  --clr-accent: #ff7750;
+
+  --foreground: var(--clr-light);
+  --background: var(--clr-dark);
+} */
 

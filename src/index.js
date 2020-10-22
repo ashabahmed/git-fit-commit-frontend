@@ -2,11 +2,11 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 	const exUrl = "http://localhost:3000/exercises/"
-	const userUrl = "http://localhost:3000/users/24"
+	const userUrl = "http://localhost:3000/users/"
 
 	let d = new Date()
 	
-	let weekday = new Array(7);
+	let weekday = new Array(14);
 	weekday[0] = "Sunday";
 	weekday[1] = "Monday";
 	weekday[2] = "Tuesday";
@@ -14,28 +14,136 @@ document.addEventListener("DOMContentLoaded", function() {
 	weekday[4] = "Thursday";
 	weekday[5] = "Friday";
 	weekday[6] = "Saturday";
+	weekday[7] = "Sunday";
+	weekday[8] = "Monday";
+	weekday[9] = "Tuesday";
+	weekday[10] = "Wednesday";
+	weekday[11] = "Thursday";
+	weekday[12] = "Friday";
+	weekday[13] = "Saturday";
 
 	let dayNum = 0;
 	let n = weekday[d.getDay() + dayNum];
-	let tomorrow = weekday[d.getDay() + 1]
-	let threeDaysFromNow = weekday[d.getDay() + 3]
+	let tomorrow = weekday[d.getDay() + 3]
+	let dayAfterTomorrow = weekday[d.getDay() + 4]
+	let threeDaysAfter = weekday[d.getDay() + 5]
 	
-	let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Oct.", "November", "December"]
-
-	const exerciseInfoDiv = document.getElementById('exerciseInfo')
-	
+	let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Oct.", "November", "December"]	
 	function addDarkmodeWidget() {
 		new Darkmode().showWidget();
 	}
 	window.addEventListener('load', addDarkmodeWidget);
 
+
+	const renderName = (user) => {
+		const navBar = document.querySelector("#navBarName")
+		navBar.innerText = user.name
+	}
+
 	const getExercises = () => {
-		fetch(userUrl)
+		fetch(userUrl + 3)
 		.then(response => response.json())
 		.then(user => {
-			
 			renderUserExercises(user)
+			renderTomorrowWorkouts(user)
+			renderDayAfterWorkouts(user)
+			renderThreeDaysFromNowWorkout(user)
 		})
+	}
+
+	const renderTomorrowWorkouts = (user) => {
+		const fullBody = user.exercises.filter(exercise => exercise.majorMuscle.includes("Full Body"))
+		const core = user.exercises.filter(exercise => exercise.majorMuscle.includes("Core"))
+		const legs = user.exercises.filter(exercise => exercise.majorMuscle.includes("Legs"))
+		const arms = user.exercises.filter(exercise => exercise.majorMuscle.includes("Arms"))
+		const back = user.exercises.filter(exercise => exercise.majorMuscle.includes("Back"))
+		const fullBodySample1 = random_exercises(fullBody)
+		const backSample = random_exercises(back)
+		const legsSample = random_exercises(legs)
+		const armsSample = random_exercises(arms)
+		const coreSample = random_exercises(core)
+
+		const tomorrowDiv = document.querySelector("#tomorrowDiv")
+		
+		if(tomorrow === "Saturday" || tomorrow === "Sunday" || tomorrow === "Tuesday" || tomorrow === "Thursday") {
+			tomorrowDiv.innerHTML = `
+			<h3 style="text-align:center;"> Rest Day </h3>
+			<p> Try for some light cardio if you're up for it! </p>
+			`
+		} else {
+			tomorrowDiv.innerHTML = `
+				<h3 style="text-align:center;">${tomorrow}</h3>
+				<br>
+				<p class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
+				<p class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
+				<p class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> 
+				<p class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p> 
+				<p class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 1 Set until failure </p> 
+				`
+		}
+	}
+
+	const renderDayAfterWorkouts = (user) => {
+		const fullBody = user.exercises.filter(exercise => exercise.majorMuscle.includes("Full Body"))
+		const core = user.exercises.filter(exercise => exercise.majorMuscle.includes("Core"))
+		const legs = user.exercises.filter(exercise => exercise.majorMuscle.includes("Legs"))
+		const arms = user.exercises.filter(exercise => exercise.majorMuscle.includes("Arms"))
+		const back = user.exercises.filter(exercise => exercise.majorMuscle.includes("Back"))
+		const dayAfterTomorrowDiv = document.querySelector("#dayAfterTomorrowDiv")
+		const fullBodySample1 = random_exercises(fullBody)
+		const backSample = random_exercises(back)
+		const legsSample = random_exercises(legs)
+		const armsSample = random_exercises(arms)
+		const coreSample = random_exercises(core)
+
+		if(dayAfterTomorrow === "Saturday" || dayAfterTomorrow === "Sunday" || dayAfterTomorrow === "Tuesday" || dayAfterTomorrow === "Thursday") {
+			dayAfterTomorrowDiv.innerHTML = `
+			<h3 style="text-align:center;"> Rest Day </h3>
+			<p> Try for some light cardio if you're up for it! </p>
+			`
+		} else {
+		dayAfterTomorrowDiv.innerHTML = `
+			<h3 style="text-align:center;">${dayAfterTomorrow}</h3>
+			<br>
+			<p class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
+			<p class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
+			<p class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> 
+			<p class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p> 
+			<p class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 1 Set until failure </p> 
+			<br>
+			`
+		}
+	}
+	const renderThreeDaysFromNowWorkout = (user) => {
+		const fullBody = user.exercises.filter(exercise => exercise.majorMuscle.includes("Full Body"))
+		const core = user.exercises.filter(exercise => exercise.majorMuscle.includes("Core"))
+		const legs = user.exercises.filter(exercise => exercise.majorMuscle.includes("Legs"))
+		const arms = user.exercises.filter(exercise => exercise.majorMuscle.includes("Arms"))
+		const back = user.exercises.filter(exercise => exercise.majorMuscle.includes("Back"))
+		const threeDaysAfterDiv = document.querySelector("#threeDaysAfterDiv")
+		const fullBodySample1 = random_exercises(fullBody)
+		const backSample = random_exercises(back)
+		const legsSample = random_exercises(legs)
+		const armsSample = random_exercises(arms)
+		const coreSample = random_exercises(core)
+
+		if(threeDaysAfter === "Saturday" || threeDaysAfter === "Sunday" || threeDaysAfter === "Tuesday" || threeDaysAfter === "Thursday") {
+			threeDaysAfterDiv.innerHTML = `
+			<h3 style="text-align:center;"> Rest Day </h3>
+			<p> Try for some light cardio if you're up for it! </p>
+			`
+		} else {
+			threeDaysAfterDiv.innerHTML = `
+			<h3 style="text-align:center;">${threeDaysAfter}</h3>
+			<br>
+			<p class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
+			<p class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
+			<p class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> 
+			<p class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p> 
+			<p class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 1 Set until failure </p> 
+			`
+		}
+	
 	}
 
 	const random_exercises = items => {
@@ -74,11 +182,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			<br>
 			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample2.id}"><b class="workout-p" data-exercise-id="${fullBodySample2.id}">${fullBodySample2.exercise}</b>: 1 Set until failure </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
 			<br>
-			<ul class="pagination pagination-sm justify-content-end" style="margin:20px 0">
-				<li class="page-item" ><a id="prev-btn" class="page-link" href="#">Previous</a></li>
-			
-				<li class="page-item" ><a id="next-btn" class="page-link" href="#">Next</a></li>
-			</ul>
 
 			
 			`
@@ -154,14 +257,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		} else {
 			const workoutDiv = document.querySelector("#workoutDiv")
 			workoutDiv.innerHTML = `
-			<h1> REST DAY!! </h1>
-			<h3> Try for some light cardio if you're up for it! </h3>
-			<h3> Resting up is just dandy though, you're doing great!</h3>
-			<ul class="pagination pagination-sm justify-content-end" style="margin:20px 0">
-				<li class="page-item" ><a id="prev-btn" class="page-link" href="#">Previous</a></li>
-		
-				<li class="page-item" ><a id="next-btn" class="page-link" href="#">Next</a></li>
-			</ul>
+			<h1> Rest Day </h1>
+			<strong> Try for some light cardio if you're up for it! </strong>
+			<p> Resting up is just dandy though, you're doing great!</p>
 			`
 		}
 
@@ -188,9 +286,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	// }
 
 	const getUser = () => {
-		fetch(userUrl)
+		fetch(userUrl + 3)
 		.then(response => response.json())
-		.then(user => renderUserWeightDiv(user))
+		.then(user => {
+			renderName(user)
+			renderUserWeightDiv(user)
+		})
 	}
 
 	const renderUserWeightDiv = (user) => {
@@ -210,6 +311,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			if(e.target.matches("#weightInput")) {
 				const weightForm = document.getElementById('weightInput')
 				const currentWeight = weightForm.currentweight.value
+				const img = weightForm.image.value
 				weightForm.reset()
 
 				fetch(userUrl)
@@ -217,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				.then(data => {
 					const currentWeightArray = data.currentWeight
 					currentWeightArray.push(currentWeight)
-					addCurrentWeight(currentWeightArray)
+					addCurrentWeight(currentWeightArray, img)
 					
 				})
 
@@ -232,13 +334,59 @@ document.addEventListener("DOMContentLoaded", function() {
 				updateMacros(proteinInput, carbsInput, fatsInput)
 			} else if(e.target.matches("#mainForm")) {
 				e.preventDefault();
+				form = e.target
+				// Attributes
+				const name = form.name.value
+				const age = form.age.value
+				const startingWeight = form.sw.value
+				const goalWeight = form.gw.value
+				const equipmentArray = []
+				const skillLevelDropDown = document.getElementById("skillLevelInput");
+				const skillLevel = skillLevelDropDown.value;
+				const sexArray = []
+				document.getElementsByName("sex").forEach(radio => {
+					if(radio.checked) {
+						sexArray.push(radio.value)
+					}
+				})
+
+				document.getElementsByName("equipment").forEach(radio => {
+					if(radio.checked) {
+						equipmentArray.push(radio.value)
+					}
+				})
 				
+				const sexValue = sexArray[0]
+
+				const newUser = { 
+					name: name, 
+					sex: sexValue, 
+					age: age, 
+					startingWeight: startingWeight,
+					currentWeight: [startingWeight], 
+					goalWeight: goalWeight, 
+					macros: "protein",
+					skillLevel: skillLevel, 
+					equipment: equipmentArray }
+
+				const options = {
+					method: "PATCH",
+					headers: {
+						"content-type": "application/json",
+						"accept": "application/json"
+					},
+					body: JSON.stringify(newUser)
+				}
+
+				fetch(userUrl + 3, options)
+				.then(response => response.json())
+				.then(getUser())
 				
 			}
 		})
 	}
 
-	const addCurrentWeight = (currentWeightArray) => {
+	const addCurrentWeight = (currentWeightArray, img) => {
 		const options = {
 					method: "PATCH",
 					headers: {
@@ -253,12 +401,12 @@ document.addEventListener("DOMContentLoaded", function() {
 				fetch(userUrl, options)
 				.then(response => response.json())
 				.then(user => {
-					addCurrentWeightLi(user),
+					addCurrentWeightLi(user, img),
 					getUser()
 				})
 	}
 
-	const addCurrentWeightLi = (user) => {
+	const addCurrentWeightLi = (user, img) => {
 		const weightUl = document.querySelector(".weightUl")
 		const newLi = document.createElement("li")
 
@@ -268,18 +416,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
 		weightUl.append(newLi)
 		
-		renderProgressCard(user)
+		renderProgressCard(user, img)
 	}
 
-	const renderProgressCard = (user) => {
+	const renderProgressCard = (user, img) => {
+		console.log(img)
+		
 		const progressDiv = document.querySelector("#progressDiv")
 		const newProgressCard = document.createElement("div")
 		newProgressCard.innerHTML = `
 			<div class="card" style="width: 18rem; margin-left: 50px;">
-				<img class="card-img-top" src="https://img.etimg.com/photo/msid-74747053,quality-100/for-miles-a-great-bodyweight-workout-would-include-squats-push-ups-walking-lunges-.jpg" alt="Card image cap">
+				<img class="card-img-top" src="${img}">
 				<div class="card-body">
-					<h5 class="card-title">Card title</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+					<h5 class="card-title">${n}</h5>
+				
+					<p class="card-text">Weight: ${user.currentWeight.slice(-1)} lbs.</p>
+					<p class="card-text">You've Lost: ${user.startingWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
+					<p class="card-text">You have ${user.goalWeight - parseInt(user.currentWeight.slice(-1))} lbs left to go!.</p>				
 				</div>
 			</div>
 		`
@@ -363,40 +516,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	})
 
 	clickHandler();
-	getUser();
 	submitHandler();
 	getExercises();
 })
-
-
-
-
-
-		// <!-- Workout Card is going provide exercises and workout regime for the week.  -->
-		// Make a function that renders all the user's exercises based off equipment.
-		// Format those exercises into a workout Program
-
-
-
-	// <!-- Make initial form for welcome page, so user can enter details -->
-	// <!-- based on that we can provide specified workouts -->
-	// <!-- Make sure all the stuff that's entered as form input saves to user's DB -->
-	// <!-- Name of exercise will be clickable and lead to that workout's details, gif, and instructions -->
-
-		// Here are different ways we can do this workout tracker
-	/*
-		dynamically select exercises for each different user based on their equpiment attribute will select 
-		the equipment select will return a colleciton of worksout that use that equipment 
-						Also filter tthrough diffculity level no matter the equipment?
-		collection will have a lot of exercises that can be shuffled through the week,
-		each card will show the work outs for that day only 
-		different days will select random exercises for that day from collection 	
-		we can do this by doing an if statement to figure out the day			
-
-		each exercise will list number of sets and reps for each exercise
-		some exercise sets will be time based and not rep based
-
-		on exercise click we can render that specific exercise and all it's details(gif, description, insturction, notes)
-		we can get the id of the exercise and set it to the dataset id number for the p tag of the exercise
-
-	*/
