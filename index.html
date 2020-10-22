@@ -4,183 +4,325 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css" />
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+		$(document).ready(function(){
+			$("#introModal").modal('show');
+		});
+	</script>
   <title>Git Fit. Git Commit.</title>
 </head>
 <body>
 <!-- NAV BAR -->
-<nav id="navBar" class="navbar navbar-expand-xl navbar-dark bg-dark" style="padding-left: 40px;">
-  <a class="navbar-brand" href="#">Git Fit. Git Commit.</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+	<nav id="navBar" class="navbar navbar-expand-xl" style="padding-left: 40px;">
+	<a class="navbar-brand" href="#">Git Fit. Git Commit.</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Exercises
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Calculate Macros</a>
-      </li>
-    </ul>
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
-  </div>
-</nav>
-<!-- INITIAL FORM START -->
-<br>
-<div>
-	<div id="intro" style="padding-left: 40px;" >
-		<form id="mainForm">
-			<div class="form-group row">
-				<label for="inputName" class="col-sm-2 col-form-label">Name</label>
-					<div class="col-sm-10">
-					<input type="name" class="form-control" id="inputName" placeholder="Name">
-					</div>
-			</div>
-			<fieldset class="form-group">
-				<div class="row">
-					<legend class="col-form-label col-sm-2 pt-0">Sex</legend>
-						<div class="col-sm-10">
-							<div class="form-check">
-								<input class="form-check-input" type="radio" name="male" id="male" value="male">
-								<label class="form-check-label" for="gridRadios1">
-								Male
-								</label>
-							</div>
-							<div class="form-check">
-								<input class="form-check-input" type="radio" name="female" id="female" value="female">
-								<label class="form-check-label">
-								Female
-								</label>
-							</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="skillLevel">Skill Level</label>
-				<select class="form-control" id="skillLevelInput">
-					<option>Beginner</option>
-					<option>Intermediate</option>
-					<option>Advanced</option>
-				</select>
-			</div>
-			</fieldset>
-				<div class="form-group row">
-					<div class="col-sm-2">Equipment</div>
-						<div class="col-sm-10">
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="bodyWeight" value="Body Weight">
-								<label class="form-check-label" for="gridCheck1">
-									Body Weight
-								</label>
-							</div>
-
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="gridCheck1">
-								<label class="form-check-label" for="gridCheck1">
-									Dumbbell
-								</label>
-							</div>
-
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="gridCheck1">
-								<label class="form-check-label" for="gridCheck1">
-									Bar
-								</label>
-							</div>
-
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="gridCheck1">
-								<label class="form-check-label" for="gridCheck1">
-									Band
-								</label>
-							</div>
-
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="gridCheck1">
-								<label class="form-check-label" for="gridCheck1">
-									Gym
-								</label>
-							</div>
-
-						</div>
-				</div>
-			<div class="form-group row">
-				<div class="col-sm-10">
-					<button type="submit" class="btn btn-primary">Sign in</button>
-				</div>
-			</div>
-		</form>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a href="#navModal" data-toggle= "modal" data-target= "#myModal" class="nav-link" id="navbar_register_btn">Update Info</a>
+			</li>
+		</ul>
 	</div>
-</div>
-<!-- MAIN DIV START -->
-
-<div class="flex-container">
-	<div class="card-deck">
-		<!-- CALORIES DIV -->
-			<div class="card" style="width: 18rem; margin-left: 50px; margin-top: 50px;" id="caloriesDiv">
-						<div class="card-body">	
-							<h1 class="card-title">Macro Tracker:</h1>
-								<h3 class="card-subtitle">Macros Left for Today:</h3>
-								<div class="macros">
-										<div class="protein"> 200g <b>Protein</b> </div>
-										<div class="carbs"> 140g <b>Carbs</b></div>
-										<div class="fats"> 65g <b>Fats</b></div>
-								</div>
-								<ul>
-								</ul>
-								<form class="form-row" id="caloriesInput">
-										<input class="col" type="text" placeholder="Protein" name="protein" >
-										<input class="col"type="text" placeholder="Carbs" name="carbs" >
-										<input class="col"type="text" placeholder="Fats" name="fats" >
-										<button class="btn btn-info" type="submit" id="log-macros">Log Macros</button>
-								</form>
-						</div>
-			</div>
-		<!-- WORKOUT DIV -->
-			<div  class="card" style="margin-top: 50px;">
-				<div id="workoutDiv" class="card-body">	
-
+</nav>
+	<!-- NAV Modal -->
+	<div class="modal fade" id="navModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Update User Info</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
-			</div>
-		<!-- WEIGHT TRACKER DIV -->
-			<div id="weightTracker" class="card" style="width: 18rem; margin-right: 50px; margin-top: 50px;">
-				<div class="card-body">	
-					<h2> Weight Tracker: </h2>
-					<div class="weightStats">
-					</div>
-					<div>
-						<p><b>Recent Entries:</b></p>
-						<ul class="weightUl">
-							<li><b>Aug. 31:</b> 160lbs</li>
-							<li><b>Oct. 6:</b> 156lbs</li>
-							<li><b>Oct. 13:</b> 153lbs</li>
-						</ul>
-						</div>
-						<form class="form-row" id="weightInput" >
-							<input class="col" type="text" placeholder="Current Weight" name="currentweight" >
-							<input class="col" type="text" placeholder="Image URL" name="img">
-							<div class="custom-file">
-								<input type="file" class="custom-file-input" id="customFile">
-								<label class="custom-file-label" for="customFile">Choose file</label>
+				<div class="modal-body">
+					<div id="intro" style="padding-left: 40px;" >
+						<form id="mainForm">
+							<fieldset class="form-group">
+								<div class="row">
+									<legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+										<div class="col-sm-10">
+											<div class="form-check">
+												<input class="form-check-input" type="radio" name="male" id="male" value="male">
+												<label class="form-check-label" for="gridRadios1">Male</label>
+											</div>
+											<div class="form-check">
+												<input class="form-check-input" type="radio" name="female" id="female" value="female">
+												<label class="form-check-label">Female</label>
+											</div>
+								</div>
 							</div>
-							<button class="btn btn-info" type="submit" id="log-entry">Log Weight</button>
+							<div class="form-group">
+								<label for="skillLevel">Skill Level</label>
+								<select class="form-control" id="skillLevelInput">
+									<option>Beginner</option>
+									<option>Intermediate</option>
+									<option>Advanced</option>
+								</select>
+							</div>
+							</fieldset>
+								<div class="form-group row">
+									<div class="col-sm-2">Equipment</div>
+										<div class="col-sm-10">
+											<br>
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="bodyWeight" value="Body Weight">
+												<label class="form-check-label" for="gridCheck1">
+													Body Weight
+												</label>
+											</div>
+			
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="gridCheck1">
+												<label class="form-check-label" for="gridCheck1">
+													Dumbbell
+												</label>
+											</div>
+			
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="gridCheck1">
+												<label class="form-check-label" for="gridCheck1">
+													Bar
+												</label>
+											</div>
+			
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="gridCheck1">
+												<label class="form-check-label" for="gridCheck1">
+													Band
+												</label>
+											</div>
+			
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="gridCheck1">
+												<label class="form-check-label" for="gridCheck1">
+													Gym
+												</label>
+											</div>
+			
+										</div>
+								</div>
+							<div class="form-group row">
+								<div class="col-sm-10">
+									<button type="submit" class="btn btn-primary">Sign in</button>
+								</div>
+							</div>
+
+
 						</form>
 					</div>
 				</div>
 			</div>
-</div>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+	<!-- END NAV Modal -->
+
+	<!-- Log In Modal -->
+	<div class="modal fade" id="introModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle">User Info</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div id="intro" style="padding-left: 40px;" >
+					<form id="mainForm">
+
+						<div class="form-group row">
+							<label for="inputName" class="col-sm-2 col-form-label">Name</label>
+								<div class="col-sm-10">
+								<input type="name" class="form-control" id="inputName" placeholder="Name">
+								</div>
+						</div>
+						<fieldset class="form-group">
+							<div class="row">
+								<legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+									<div class="col-sm-10">
+										<div class="form-check">
+											<input class="form-check-input" type="radio" name="male" id="male" value="male">
+											<label class="form-check-label" for="gridRadios1">
+											Male
+											</label>
+										</div>
+										<div class="form-check">
+											<input class="form-check-input" type="radio" name="female" id="female" value="female">
+											<label class="form-check-label">
+											Female
+											</label>
+										</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="skillLevel">Skill Level</label>
+							<select class="form-control" id="skillLevelInput">
+								<option>Beginner</option>
+								<option>Intermediate</option>
+								<option>Advanced</option>
+							</select>
+						</div>
+						</fieldset>
+							<div class="form-group row">
+								<div class="col-sm-2">Equipment</div>
+									<div class="col-sm-10">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" id="bodyWeight" value="Body Weight">
+											<label class="form-check-label" for="gridCheck1">
+												Body Weight
+											</label>
+										</div>
+		
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" id="gridCheck1">
+											<label class="form-check-label" for="gridCheck1">
+												Dumbbell
+											</label>
+										</div>
+		
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" id="gridCheck1">
+											<label class="form-check-label" for="gridCheck1">
+												Bar
+											</label>
+										</div>
+		
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" id="gridCheck1">
+											<label class="form-check-label" for="gridCheck1">
+												Band
+											</label>
+										</div>
+		
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" id="gridCheck1">
+											<label class="form-check-label" for="gridCheck1">
+												Gym
+											</label>
+										</div>
+		
+									</div>
+							</div>
+						<div class="form-group row">
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary">Sign in</button>
+							</div>
+						</div>
+
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	</div>
+	</div>
+	<!-- END Modal -->
+
+	<!-- MAIN DIV START -->
+
+<div id="homediv">
+	<div class="container">
+		<div class="card-deck" style="background-color: none;">
+			<!-- CALORIES DIV -->
+				<div class="card" style="background-color: none;" id="caloriesDiv">
+							<div class="card-body">	
+								<h1 class="card-title">Macro Tracker:</h1>
+									<h3 class="card-subtitle">Macros Left for Today:</h3>
+									<div class="macros">
+											<div class="protein"> 200g <b>Protein</b> </div>
+											<div class="carbs"> 140g <b>Carbs</b></div>
+											<div class="fats"> 65g <b>Fats</b></div>
+									</div>
+									<ul>
+									</ul>
+									<form class="form-row" id="caloriesInput">
+											<input class="col" type="text" placeholder="Protein" name="protein" >
+											<input class="col"type="text" placeholder="Carbs" name="carbs" >
+											<input class="col"type="text" placeholder="Fats" name="fats" >
+											<button class="btn btn-info" type="submit" id="log-macros">Log Macros</button>
+									</form>
+							</div>
+				</div>
+			<!-- WORKOUT DIV -->
+				<div  class="card" >
+					<div id="workoutDiv" class="card-body">	
+						<ul class="pagination pagination-sm">
+							<li class="page-item"><a class="page-link" id="prev-btn" href="#">Previous</a></li>
+					
+							<li class="page-item"><a class= "page-link" id="next-btn" href="#">Next</a></li>
+						</ul>
+					</div>
+				</div>
+			<!-- WEIGHT TRACKER DIV -->
+				<div id="weightTracker" class="card" >
+					<div class="card-body">	
+						<h2> Weight Tracker: </h2>
+						<div class="weightStats">
+						</div>
+						<div>
+							<p><b>Recent Entries:</b></p>
+							<ul class="weightUl">
+								<li><b>Aug. 31:</b> 160lbs</li>
+								<li><b>Oct. 6:</b> 156lbs</li>
+								<li><b>Oct. 13:</b> 153lbs</li>
+							</ul>
+
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#weightModal">
+							Log Entry
+						</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLongTitle">Enter Current Weight</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+								</div>
+								<div class="modal-body">
+									
+								
+									<form id="weightInput" >
+										<div class="form-group" >
+											<label for="currentweight" class="col-form-label">Current Weight:</label>
+											<input class="form-control" type="number" name="currentweight" >
+											<label for="image" class="col-form-label">Upload Photo:</label>
+											<div class="custom-file">
+												<label class="custom-file-label" for="customFile">Choose file</label>
+												<input type="file" class="custom-file-input" id="customFile">
+											</div>
+											<br><br>
+											<button class="btn btn-info" type="submit" id="log-entry">Log Weight</button>
+										</div>
+									</form>
+								</div>
+								<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	</div>
 <br><br><br><br>
+
+
+
 <!-- PROGRESS DIV -->
 	<div id="progressDiv">
 		
@@ -188,32 +330,36 @@
 <br><br><br><br>
 
 <!-- EXERCISE INFO DIV -->
-<div id="exerciseInfo" style="width: min-content; margin-left: 50px;"">
-	<ul class="pagination pagination-sm">
-		<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		<li class="page-item"><a class="page-link" href="#">Next</a></li>
-	</ul>
-</div>
+	<div id="exerciseInfo">
+		<!-- <ul class="pagination pagination-sm">
+			<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+			<li class="page-item"><a class="page-link" href="#">1</a></li>
+			<li class="page-item"><a class="page-link" href="#">2</a></li>
+			<li class="page-item"><a class="page-link" href="#">3</a></li>
+			<li class="page-item"><a class="page-link" href="#">Next</a></li>
+		</ul> -->
+	</div>
 <br><br><br><br>
+
 <!-- MAIN DIV END -->
-	
+</div>
+<div>
+	<h1>Upcoming Workouts:</h1>
+</div>
 <!-- FOOTER DIV -->
 
+		<script type="text/javascript" src="src/index.js"></script>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<script type="text/javascript" src="src/index.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+		<!-- Popper JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>
