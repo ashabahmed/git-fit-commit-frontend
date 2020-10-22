@@ -312,6 +312,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				const weightForm = document.getElementById('weightInput')
 				const currentWeight = weightForm.currentweight.value
 				const img = weightForm.image.value
+				const notes = weightForm.notes.value
 				weightForm.reset()
 
 				fetch(userUrl)
@@ -319,7 +320,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				.then(data => {
 					const currentWeightArray = data.currentWeight
 					currentWeightArray.push(currentWeight)
-					addCurrentWeight(currentWeightArray, img)
+					addCurrentWeight(currentWeightArray, img, notes)
 					
 				})
 
@@ -389,7 +390,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		})
 	}
 
-	const addCurrentWeight = (currentWeightArray, img) => {
+	const addCurrentWeight = (currentWeightArray, img, notes) => {
 		const options = {
 					method: "PATCH",
 					headers: {
@@ -404,12 +405,64 @@ document.addEventListener("DOMContentLoaded", function() {
 				fetch(userUrl, options)
 				.then(response => response.json())
 				.then(user => {
-					addCurrentWeightLi(user, img),
-					getUser()
+					addCurrentWeightLi(user, img, notes),
+					getUser(),
+					renderChart()
 				})
 	}
 
-	const addCurrentWeightLi = (user, img) => {
+	const renderChart = () => {
+	const ctx = document.getElementById('myChart');
+			const myChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: [],
+					datasets: [{
+						label: 'Current Weight',
+						data: [],
+						backgroundColor: [
+							'rgba(255, 99, 132, 0.2)',
+							'rgba(54, 162, 235, 0.2)',
+							'rgba(255, 206, 86, 0.2)',
+							'rgba(75, 192, 192, 0.2)',
+							'rgba(153, 102, 255, 0.2)',
+							'rgba(255, 159, 64, 0.2)'
+						],
+						borderColor: [
+							'rgba(255, 99, 132, 1)',
+							'rgba(54, 162, 235, 1)',
+							'rgba(255, 206, 86, 1)',
+							'rgba(75, 192, 192, 1)',
+							'rgba(153, 102, 255, 1)',
+							'rgba(255, 159, 64, 1)'
+						],
+						borderWidth: 1
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			});
+
+			
+			renderUser();
+		}
+
+	const renderUser = () => {
+		fetch(userUrl)
+		.then(response => response.json())
+		.then(user => {
+			myChart.data["datasets"]["data"] = user.currentWeight
+		})
+	}
+
+	const addCurrentWeightLi = (user, img, notes) => {
 		const weightUl = document.querySelector(".weightUl")
 		const newLi = document.createElement("li")
 
@@ -419,26 +472,25 @@ document.addEventListener("DOMContentLoaded", function() {
 
 		weightUl.append(newLi)
 		
-		renderProgressCard(user, img)
+		renderProgressCard(user, img, notes)
 	}
 
-	const renderProgressCard = (user, img) => {
+	const renderProgressCard = (user, img, notes) => {
 		
 		const progressDiv = document.querySelector("#progressDiv")
 		const newProgressCard = document.createElement("div")
 		newProgressCard.innerHTML = `
-			<div class="card" style="width: 18rem; margin-left: 50px;">
+			<div class="card" style="width: 18rem; height: 24rem; margin-left: 50px;">
 				<img class="card-img-top" src="${img}">
 				<div class="card-body">
 					<h5 class="card-title">${months[d.getMonth()]} ${d.getDate()}</h5>
+					<p class="card-text">Weight: <strong>${user.currentWeight.slice(-1)}lbs.</strong> You've Lost: <strong>${user.startingWeight - parseInt(user.currentWeight.slice(-1))}lbs.</strong>. You have <strong>${user.goalWeight - parseInt(user.currentWeight.slice(-1))}lbs</strong> left to go!</p>
+					<p class="card-text">${notes} </p>				
 				
-					<p class="card-text">Weight: ${user.currentWeight.slice(-1)} lbs.</p>
-					<p class="card-text">You've Lost: ${user.startingWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
-					<p class="card-text">You have ${user.goalWeight - parseInt(user.currentWeight.slice(-1))} lbs left to go!</p>				
 				</div>
 			</div>
 		`
-		if (progressDiv.childElementCount >= 3) {
+		if (progressDiv.childElementCount >= 4) {
 			let firstImgDiv = progressDiv.children[0]
 			progressDiv.removeChild(firstImgDiv)
 			progressDiv.appendChild(newProgressCard)

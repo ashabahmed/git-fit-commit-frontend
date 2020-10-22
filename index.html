@@ -22,7 +22,7 @@
 
 
 		<!-- NAV BAR -->
-			<nav id="navBar" class="navbar-nav" style="padding-left: 40px; height: max-content;">
+			<nav id="navBar" class="navbar-nav" style="padding-left: 40px; height: max-content;" data-aos="fade">
 				<br>
 				<h1 class="navbar-brand" href="#">
 					<img src="src/gitfitlogoblack.png" width="30px" height="30px" class="d-inline-block align-top" alt="">
@@ -138,7 +138,7 @@
 			<!-- END NAV Modal -->
 
 			<!-- Log In Modal -->
-			<div class="modal fade" style="width:100%;" id="introModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<!-- <div class="modal fade" style="width:100%;" id="introModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -240,7 +240,7 @@
 			<div class="modal-footer">
 			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
-			</div>
+			</div> -->
 			<!-- END Modal -->
 
 			<!-- MAIN DIV START -->
@@ -317,7 +317,10 @@
 													<input class="form-control" type="number" name="currentweight" placeholder="Enter Weight">
 													<label for="image" class="col-form-label">Upload Image:</label>
 													<input class="form-control" type="text" name="image" placeholder="Image URL">
-													<br><br>
+													<div class="form-group">
+														<label for="message-text" class="col-form-label">Notes:</label>
+														<textarea class="form-control" id="message-text" name="notes" ></textarea>
+													</div>
 													<button class="btn btn-info" type="submit" id="log-entry">Log Weight</button>
 												</div>
 											</form>
@@ -348,7 +351,7 @@
 		<!-- MAIN DIV END -->
 		</div>
 		<br><br><br><br>
-		<div data-aos="slide-left">
+		<div data-aos="flip-up">
 			<h1 style="text-align: center">Upcoming Workouts:</h1>
 			<br>
 			<div class="container">
@@ -376,40 +379,37 @@
 		<div style="width: 100vh; height: max-content;">
 			<h1>See Your Progress!</h1>
 			<br><br>
-			<div id="progressDiv" class="flex-container" data-aos="slide-right" style="background-color: transparent;">
+			<div id="progressDiv" class="flex-container" data-aos="flip-up" style="background-color: transparent;">
 				<div>
-					<div class="card" style="width: 18rem; margin-left: 50px; background-color: transparent;">
+					<div class="card" style="width: 20rem; overflow: auto; max-height: 800px; margin-left: 50px; background-color: transparent;">
 						<img class="card-img-top" src="https://i.pinimg.com/originals/d5/81/56/d58156add090904b515830cccb6bca60.jpg">
-						<div class="card-body">
+						<div class="card-body" style="overflow: scroll; max-height: 800px;">
 							<h5 class="card-title">August 31</h5>
-						
-							<p class="card-text">Weight: 248 lbs.</p>
-							<p class="card-text">You've Lost: 2 lbs.</p>
-							<p class="card-text">You have 93 lbs left to go!.</p>				
+							<p class="card-text">Weight: <strong>248lbs.</strong> You've Lost: <strong>2lbs</strong>. You have <strong>93lbs</strong> left to go!</p>
+							<p class="card-text">I felt amazing today! </p>				
+				
 						</div>
 					</div>
 				</div>
 				<div>
-					<div class="card" style="width: 18rem; margin-left: 50px; background-color: transparent;">
+					<div class="card" style="width: 20rem; overflow: auto; max-height: 800px; margin-left: 50px; background-color: transparent;">
 						<img class="card-img-top" src="https://i.pinimg.com/originals/aa/92/92/aa9292c581705b344aea08ba75bd0af2.jpg">
-						<div class="card-body">
+						<div class="card-body" style="overflow: scroll; max-height: 800px;">
 							<h5 class="card-title">October 6</h5>
-						
-							<p class="card-text">Weight: 247 lbs.</p>
-							<p class="card-text">You've Lost: 3 lbs.</p>
-							<p class="card-text">You have 92 lbs left to go!.</p>				
+							<p class="card-text">Weight: <strong>247lbs.</strong> You've Lost: <strong>3lbs</strong>. You have <strong>92lbs</strong> left to go!</p>
+							<p class="card-text">It was a rough week but I got through it.</p>				
+							
 						</div>
 					</div>
 				</div>
 				<div>
-					<div class="card" style="width: 18rem; margin-left: 50px; background-color: transparent;">
+					<div class="card" style="width: 20rem; overflow: auto; max-height: 800px; margin-left: 50px; background-color: transparent;">
 						<img class="card-img-top" src="https://i.pinimg.com/originals/b3/94/eb/b394ebdb69a1361b3ea8391b2c104170.jpg">
-						<div class="card-body">
+						<div class="card-body" style="overflow: scroll; max-height: 800px;">
 							<h5 class="card-title">October 13</h5>
-						
-							<p class="card-text">Weight: 244 lbs.</p>
-							<p class="card-text">You've Lost: 6 lbs.</p>
-							<p class="card-text">You have 89 lbs left to go!</p>				
+							<p class="card-text">Weight: <strong>244lbs.</strong> You've Lost: <strong>6lbs</strong>. You have <strong>89lbs</strong> left to go!</p>
+							<p class="card-text">So happy with my weigh in!</p>				
+								
 						</div>
 					</div>
 				</div>
@@ -485,43 +485,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js" integrity="sha512-hZf9Qhp3rlDJBvAKvmiG+goaaKRZA6LKUO35oK6EsM0/kjPK32Yw7URqrq3Q+Nvbbt8Usss+IekL7CRn83dYmw==" crossorigin="anonymous"></script>
 
 		<script>
-			var ctx = document.getElementById('myChart');
-			var myChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-					datasets: [{
-						label: '# of Votes',
-						data: [12, 19, 3, 5, 2, 3],
-						backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)',
-							'rgba(255, 206, 86, 0.2)',
-							'rgba(75, 192, 192, 0.2)',
-							'rgba(153, 102, 255, 0.2)',
-							'rgba(255, 159, 64, 0.2)'
-						],
-						borderColor: [
-							'rgba(255, 99, 132, 1)',
-							'rgba(54, 162, 235, 1)',
-							'rgba(255, 206, 86, 1)',
-							'rgba(75, 192, 192, 1)',
-							'rgba(153, 102, 255, 1)',
-							'rgba(255, 159, 64, 1)'
-						],
-						borderWidth: 1
-					}]
-				},
-				options: {
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero: true
-							}
-						}]
-					}
-				}
-			});
+			
 			</script>
 
 			<script>
