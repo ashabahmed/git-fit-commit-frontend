@@ -296,11 +296,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	const renderUserWeightDiv = (user) => {
 		const stats = document.querySelector(".weightStats")
 		stats.innerHTML = `
-		<p>Goal Weight: ${user.goalWeight} lbs.</p>
+		<h5 style="text-align:center;">GOAL WEIGHT: ${user.goalWeight} lbs.</h5>
 		<p>Starting Weight: ${user.startingWeight} lbs.</p>
 		<p>Current Weight: ${user.currentWeight.slice(-1)} lbs.</p>
 		<p>Pounds Lost: ${user.startingWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
 		<p>Pounds Left: ${user.goalWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
+		
 		`
 	}
 
@@ -422,7 +423,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	const renderProgressCard = (user, img) => {
-		console.log(img)
 		
 		const progressDiv = document.querySelector("#progressDiv")
 		const newProgressCard = document.createElement("div")
@@ -430,15 +430,22 @@ document.addEventListener("DOMContentLoaded", function() {
 			<div class="card" style="width: 18rem; margin-left: 50px;">
 				<img class="card-img-top" src="${img}">
 				<div class="card-body">
-					<h5 class="card-title">${n}</h5>
+					<h5 class="card-title">${months[d.getMonth()]} ${d.getDate()}</h5>
 				
 					<p class="card-text">Weight: ${user.currentWeight.slice(-1)} lbs.</p>
 					<p class="card-text">You've Lost: ${user.startingWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
-					<p class="card-text">You have ${user.goalWeight - parseInt(user.currentWeight.slice(-1))} lbs left to go!.</p>				
+					<p class="card-text">You have ${user.goalWeight - parseInt(user.currentWeight.slice(-1))} lbs left to go!</p>				
 				</div>
 			</div>
 		`
-		progressDiv.appendChild(newProgressCard)
+		if (progressDiv.childElementCount >= 3) {
+			let firstImgDiv = progressDiv.children[0]
+			progressDiv.removeChild(firstImgDiv)
+			progressDiv.appendChild(newProgressCard)
+		} else {
+			progressDiv.appendChild(newProgressCard)
+		}
+		
 	}
 
 	const updateMacros = (proteinInput, carbsInput, fatsInput) => {
@@ -455,16 +462,12 @@ document.addEventListener("DOMContentLoaded", function() {
 		
 	}
 
+	
+
 	// const clickHandler = () => {
 	// 	document.addEventListener('click', e =>{
-	// 		if (e.target.matches("#next-btn")) {
-	// 				dayNum += 1
-					
-	// 			} else if (e.target.matches("#prev-btn")) {
-	// 				dayNum -= 1
-					
-	// 			}
-
+	// 		const target = e.target
+			
 	// 	})
 
 	// }

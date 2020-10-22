@@ -15,424 +15,437 @@
 		</script>
 	<title>Git Fit. Git Commit.</title>
 </head>
+
 <body>
-<!-- NAV BAR -->
-	<nav id="navBar" class="navbar-nav" style="padding-left: 40px; height: max-content;">
-		<br>
-		<h1 class="navbar-brand" href="#">
-			<img src="src/gitfitlogoblack.png" width="30px" height="30px" class="d-inline-block align-top" alt="">
-			Git Fit. Git Commit.
-		</h1>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav mr-auto">
-			<li class="nav-item">
-				<a href="#navModal" data-toggle= "modal" data-target= "#myModal" class="nav-link" id="navbar_register_btn">Update Info</a>
-			</li>
-		</ul>
-	</div>
-
-	<h1 id="navBarName"></h1>
-</nav>
-	<!-- NAV Modal -->
-	<div class="modal fade" id="navModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Update User Info</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div id="intro" style="padding-left: 40px;" >
-						<form id="mainForm">
-							<fieldset class="form-group">
-								<div class="row">
-									<legend class="col-form-label col-sm-2 pt-0">Sex</legend>
-										<div class="col-sm-10">
-											<div class="form-check">
-												<input class="form-check-input" type="radio" name="male" id="male" value="male">
-												<label class="form-check-label" for="gridRadios1">Male</label>
-											</div>
-											<div class="form-check">
-												<input class="form-check-input" type="radio" name="female" id="female" value="female">
-												<label class="form-check-label">Female</label>
-											</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="skillLevel">Skill Level</label>
-								<select class="form-control" id="skillLevelInput">
-									<option>Beginner</option>
-									<option>Intermediate</option>
-									<option>Advanced</option>
-								</select>
-							</div>
-							</fieldset>
-								<div class="form-group row">
-									<div class="col-sm-2">Equipment</div>
-										<div class="col-sm-10">
-											<br>
-											<div class="form-check">
-												<input class="form-check-input" type="radio" id="bodyWeight" value="Body Weight">
-												<label class="form-check-label" for="gridCheck1">
-													Body Weight
-												</label>
-											</div>
-			
-											<div class="form-check">
-												<input class="form-check-input" type="radio" id="Dumbbell">
-												<label class="form-check-label" for="Dumbbell">
-													Dumbbell
-												</label>
-											</div>
-			
-											<div class="form-check">
-												<input class="form-check-input" type="radio" id="Bar">
-												<label class="form-check-label" for="Bar">
-													Bar
-												</label>
-											</div>
-			
-											<div class="form-check">
-												<input class="form-check-input" type="radio" id="Band">
-												<label class="form-check-label" for="Band">
-													Band
-												</label>
-											</div>
-			
-											<div class="form-check">
-												<input class="form-check-input" type="radio" id="Gym">
-												<label class="form-check-label" for="Gym">
-													Gym
-												</label>
-											</div>
-			
-										</div>
-								</div>
-							<div class="form-group row">
-								<div class="col-sm-10">
-									<button type="submit">Sign in</button>
-								</div>
-							</div>
+	<!-- THIS IS THE MAIN DIV FOR USER  -->
+	<div id="#userDiv"> 
 
 
-						</form>
-					</div>
-				</div>
+		<!-- NAV BAR -->
+			<nav id="navBar" class="navbar-nav" style="padding-left: 40px; height: max-content;">
+				<br>
+				<h1 class="navbar-brand" href="#">
+					<img src="src/gitfitlogoblack.png" width="30px" height="30px" class="d-inline-block align-top" alt="">
+					Git Fit. Git Commit.
+				</h1>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a href="#navModal" data-toggle= "modal" data-target= "#myModal" class="nav-link" id="navbar_register_btn">Update Info</a>
+					</li>
+				</ul>
 			</div>
-		</div>
-		<div class="modal-footer">
-		<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		</div>
-	</div>
-	<!-- END NAV Modal -->
 
-	<!-- Log In Modal -->
-	<div class="modal fade" style="width:100%;" id="introModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">User Info</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div id="intro" style="padding-left: 40px;" >
-					<form id="mainForm">
-
-						<div class="form-group row">
-							<label for="inputName" class="col-sm-2 col-form-label">Name:</label>
-								<div class="col-sm-10">
-								<input type="name" class="form-control" id="inputName" name="name" placeholder="Enter Name">
-								</div>
+			<h1 id="navBarName"></h1>
+		</nav>
+			<!-- NAV Modal -->
+			<div class="modal fade" id="navModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Update User Info</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
-						<div class="form-group row">
-							<label for="inputAge" class="col-sm-2 col-form-label">Age:</label>
-								<div class="col-sm-10">
-								<input type="number" class="form-control" id="inputAge" name="age" placeholder="Enter Age">
-								</div>
-						</div>
-						<fieldset class="form-group">
-							<div class="row">
-								<legend class="col-form-label col-sm-2 pt-0">Sex:</legend>
-									<div class="col-sm-10">
-										<div class="form-check">
-											<input class="form-check-input" type="radio" name="sex" id="male" value="male">
-											<label class="form-check-label" for="gridRadios1">Male</label>
-										</div>
-										<div class="form-check">
-											<input class="form-check-input" type="radio" name="sex" id="female" value="female">
-											<label class="form-check-label">Female</label>
-										</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="skillLevel">Skill Level</label>
-							<select class="form-control" id="skillLevelInput">
-								<option value="Beginner">Beginner</option>
-								<option value="Intermediate">Intermediate</option>
-								<option value="Advanced">Advanced</option>
-							</select>
-						</div>
-						</fieldset>
-							<div class="form-group row" >
-								<div class="col-sm-2" style="padding-right: 5rem;">Equipment: </div>
-									<div class="col-sm-10">
-										<div class="form-check">
-											<input class="form-check-input" type="radio" id="bodyWeight" name="equipment" value="Body Weight">
-											<label class="form-check-label" >Body Weight</label>
-										</div>
-		
-										<div class="form-check">
-											<input class="form-check-input" type="radio" id="Dumbbell" name="equipment" value="Dumbbell">
-											<label class="form-check-label">Dumbbell</label>
-										</div>
-		
-										<div class="form-check">
-											<input class="form-check-input" type="radio" id="Bar" name="equipment" value="Bar">
-											<label class="form-check-label">Bar</label>
-										</div>
-		
-										<div class="form-check">
-											<input class="form-check-input" type="radio" id="Band" name="equipment" value="Band">
-											<label class="form-check-label">Band</label>
-										</div>
-		
-										<div class="form-check">
-											<input class="form-check-input" type="radio" id="Gym" name="equipment" value="Gym">
-											<label class="form-check-label">Gym</label>
+						<div class="modal-body">
+							<div id="intro" style="padding-left: 40px;" >
+								<form id="mainForm">
+									<fieldset class="form-group">
+										<div class="row">
+											<legend class="col-form-label col-sm-2 pt-0">Sex</legend>
+												<div class="col-sm-10">
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="male" id="male" value="male">
+														<label class="form-check-label" for="gridRadios1">Male</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="female" id="female" value="female">
+														<label class="form-check-label">Female</label>
+													</div>
 										</div>
 									</div>
-							</div>
-							<div class="form-group row">
-								<label for="startingweight" class="col-sm-2 col-form-label">Starting Weight: </label>
-									<div class="col-sm-10">
-										<input type="number" class="form-control" id="startingweightInput" placeholder="Enter Starting Weight" name="sw">
+									<div class="form-group">
+										<label for="skillLevel">Skill Level</label>
+										<select class="form-control" id="skillLevelInput">
+											<option>Beginner</option>
+											<option>Intermediate</option>
+											<option>Advanced</option>
+										</select>
 									</div>
-							</div>
-							<div class="form-group row">
-								<label for="goalweight" class="col-sm-2 col-form-label">Goal Weight:</label>
-									<div class="col-sm-10">
-										<input type="number" class="form-control" id="goalweightInput" placeholder="Enter Goal Weight" name="gw">
-									</div>
-							</div>
-						<div class="form-group row">
-							<div class="col-sm-10">
-								<button type="submit" >Enter</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="modal-footer">
-	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	</div>
-	</div>
-	<!-- END Modal -->
-
-	<!-- MAIN DIV START -->
-
-<div id="homediv">
-	<div class="container">
-		<div class="card-deck" style="background-color: none;">
-			<!-- CALORIES DIV -->
-				<div class="card" style="background-color: transparent;" id="caloriesDiv">
-							<div class="card-body">	
-								<h1 class="card-title">Macro Tracker:</h1>
-									<h3 class="card-subtitle">Macros Left for Today:</h3>
-									<div class="macros">
-											<div class="protein"> 200g <b>Protein</b> </div>
-											<div class="carbs"> 140g <b>Carbs</b></div>
-											<div class="fats"> 65g <b>Fats</b></div>
-									</div>
-									<ul>
-									</ul>
-									<form class="form-row" id="caloriesInput">
-											<input class="col" type="text" placeholder="Protein" name="protein" >
-											<input class="col"type="text" placeholder="Carbs" name="carbs" >
-											<input class="col"type="text" placeholder="Fats" name="fats" >
-											<button type="submit" id="log-macros">Log Macros</button>
-									</form>
-							</div>
-				</div>
-			<!-- WORKOUT DIV -->
-				<div  class="card" style="background-color: transparent;">
-					<div id="workoutDiv" class="card-body">	
-						<ul class="pagination pagination-sm">
-							<li class="page-item"><a class="page-link" id="prev-btn" href="#">Previous</a></li>
+									</fieldset>
+										<div class="form-group row">
+											<div class="col-sm-2">Equipment</div>
+												<div class="col-sm-10">
+													<br>
+													<div class="form-check">
+														<input class="form-check-input" type="radio" id="bodyWeight" value="Body Weight">
+														<label class="form-check-label" for="gridCheck1">
+															Body Weight
+														</label>
+													</div>
 					
-							<li class="page-item"><a class= "page-link" id="next-btn" href="#">Next</a></li>
-						</ul>
-					</div>
-				</div>
-			<!-- WEIGHT TRACKER DIV -->
-				<div id="weightTracker" class="card" style="background-color: transparent;" >
-					<div class="card-body">	
-						<h2> Weight Tracker: </h2>
-						<div class="weightStats">
-						</div>
-						<div>
-							<p><b>Recent Entries:</b></p>
-							<ul class="weightUl">
-								<li><b>Aug. 31:</b> 248lbs</li>
-								<li><b>Oct. 6:</b> 247lbs</li>
-								<li><b>Oct. 13:</b> 244lbs</li>
-							</ul>
-
-						<!-- Button trigger modal -->
-						<button type="button" data-toggle="modal" data-target="#weightModal">
-							Log Entry
-						</button>
-						
-						<!-- Modal -->
-						<div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLongTitle">Enter Current Weight</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								</div>
-								<div class="modal-body">
-									
-								
-									<form id="weightInput" >
-										<div class="form-group" >
-											<label for="currentweight" class="col-form-label">Current Weight:</label>
-											<input class="form-control" type="number" name="currentweight" placeholder="Enter Weight">
-											<label for="image" class="col-form-label">Upload Image:</label>
-											<input class="form-control" type="text" name="image" placeholder="Image URL">
-											<br><br>
-											<button class="btn btn-info" type="submit" id="log-entry">Log Weight</button>
+													<div class="form-check">
+														<input class="form-check-input" type="radio" id="Dumbbell">
+														<label class="form-check-label" for="Dumbbell">
+															Dumbbell
+														</label>
+													</div>
+					
+													<div class="form-check">
+														<input class="form-check-input" type="radio" id="Bar">
+														<label class="form-check-label" for="Bar">
+															Bar
+														</label>
+													</div>
+					
+													<div class="form-check">
+														<input class="form-check-input" type="radio" id="Band">
+														<label class="form-check-label" for="Band">
+															Band
+														</label>
+													</div>
+					
+													<div class="form-check">
+														<input class="form-check-input" type="radio" id="Gym">
+														<label class="form-check-label" for="Gym">
+															Gym
+														</label>
+													</div>
+					
+												</div>
 										</div>
-									</form>
-								</div>
-								<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-								</div>
-							</div>
+									<div class="form-group row">
+										<div class="col-sm-10">
+											<button type="submit">Sign in</button>
+										</div>
+									</div>
+
+
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-	</div>
-<br><br><br><br>
+				<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+			<!-- END NAV Modal -->
 
-<!-- EXERCISE INFO DIV -->
-	<div id="exerciseInfo">
-		<!-- <ul class="pagination pagination-sm">
-			<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-			<li class="page-item"><a class="page-link" href="#">1</a></li>
-			<li class="page-item"><a class="page-link" href="#">2</a></li>
-			<li class="page-item"><a class="page-link" href="#">3</a></li>
-			<li class="page-item"><a class="page-link" href="#">Next</a></li>
-		</ul> -->
-	</div>
-<br><br><br><br>
+			<!-- Log In Modal -->
+			<div class="modal fade" style="width:100%;" id="introModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLongTitle">User Info</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div id="intro" style="padding-left: 40px;" >
+							<form id="mainForm">
 
-<!-- MAIN DIV END -->
-</div>
-<br><br><br><br>
-<div data-aos="slide-left">
-	<h1 style="text-align: center">Upcoming Workouts:</h1>
-	<br>
-	<div class="container">
-		<div class="row">
-			<div id="tomorrowDiv" class="col-sm" style="padding-right: 15px;">
+								<div class="form-group row">
+									<label for="inputName" class="col-sm-2 col-form-label">Name:</label>
+										<div class="col-sm-10">
+										<input type="name" class="form-control" id="inputName" name="name" placeholder="Enter Name">
+										</div>
+								</div>
+								<div class="form-group row">
+									<label for="inputAge" class="col-sm-2 col-form-label">Age:</label>
+										<div class="col-sm-10">
+										<input type="number" class="form-control" id="inputAge" name="age" placeholder="Enter Age">
+										</div>
+								</div>
+								<fieldset class="form-group">
+									<div class="row">
+										<legend class="col-form-label col-sm-2 pt-0">Sex:</legend>
+											<div class="col-sm-10">
+												<div class="form-check">
+													<input class="form-check-input" type="radio" name="sex" id="male" value="male">
+													<label class="form-check-label" for="gridRadios1">Male</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" type="radio" name="sex" id="female" value="female">
+													<label class="form-check-label">Female</label>
+												</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="skillLevel">Skill Level</label>
+									<select class="form-control" id="skillLevelInput">
+										<option value="Beginner">Beginner</option>
+										<option value="Intermediate">Intermediate</option>
+										<option value="Advanced">Advanced</option>
+									</select>
+								</div>
+								</fieldset>
+									<div class="form-group row" >
+										<div class="col-sm-2" style="padding-right: 5rem;">Equipment: </div>
+											<div class="col-sm-10">
+												<div class="form-check">
+													<input class="form-check-input" type="radio" id="bodyWeight" name="equipment" value="Body Weight">
+													<label class="form-check-label" >Body Weight</label>
+												</div>
+				
+												<div class="form-check">
+													<input class="form-check-input" type="radio" id="Dumbbell" name="equipment" value="Dumbbell">
+													<label class="form-check-label">Dumbbell</label>
+												</div>
+				
+												<div class="form-check">
+													<input class="form-check-input" type="radio" id="Bar" name="equipment" value="Bar">
+													<label class="form-check-label">Bar</label>
+												</div>
+				
+												<div class="form-check">
+													<input class="form-check-input" type="radio" id="Band" name="equipment" value="Band">
+													<label class="form-check-label">Band</label>
+												</div>
+				
+												<div class="form-check">
+													<input class="form-check-input" type="radio" id="Gym" name="equipment" value="Gym">
+													<label class="form-check-label">Gym</label>
+												</div>
+											</div>
+									</div>
+									<div class="form-group row">
+										<label for="startingweight" class="col-sm-2 col-form-label">Starting Weight: </label>
+											<div class="col-sm-10">
+												<input type="number" class="form-control" id="startingweightInput" placeholder="Enter Starting Weight" name="sw">
+											</div>
+									</div>
+									<div class="form-group row">
+										<label for="goalweight" class="col-sm-2 col-form-label">Goal Weight:</label>
+											<div class="col-sm-10">
+												<input type="number" class="form-control" id="goalweightInput" placeholder="Enter Goal Weight" name="gw">
+											</div>
+									</div>
+								<div class="form-group row">
+									<div class="col-sm-10">
+										<button type="submit" >Enter</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div id="dayAfterTomorrowDiv" class="col-sm" style="padding: 0px, 15px, 0px, 15px; width: 100%;">
+			<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
-			<div id="threeDaysAfterDiv" class="col-sm" style="padding-left: 15px;">
 			</div>
+			<!-- END Modal -->
+
+			<!-- MAIN DIV START -->
+
+		<div id="homediv">
+			<div class="container">
+				<div class="card-deck" style="background-color: none;">
+					<!-- CALORIES DIV -->
+						<div class="card" style="background-color: transparent;" id="caloriesDiv">
+									<div class="card-body">	
+										<h1 class="card-title">Macro Tracker:</h1>
+											<h3 class="card-subtitle">Macros Left for Today:</h3>
+											<div class="macros">
+													<div class="protein"> 200g <b>Protein</b> </div>
+													<div class="carbs"> 140g <b>Carbs</b></div>
+													<div class="fats"> 65g <b>Fats</b></div>
+											</div>
+											<ul>
+											</ul>
+											<form class="form-row" id="caloriesInput">
+													<input class="col" type="text" placeholder="Protein" name="protein" >
+													<input class="col"type="text" placeholder="Carbs" name="carbs" >
+													<input class="col"type="text" placeholder="Fats" name="fats" >
+													<button type="submit" id="log-macros">Log Macros</button>
+											</form>
+									</div>
+						</div>
+					<!-- WORKOUT DIV -->
+						<div  class="card" style="background-color: transparent;">
+							<div id="workoutDiv" class="card-body">	
+								<ul class="pagination pagination-sm">
+									<li class="page-item"><a class="page-link" id="prev-btn" href="#">Previous</a></li>
+							
+									<li class="page-item"><a class= "page-link" id="next-btn" href="#">Next</a></li>
+								</ul>
+							</div>
+						</div>
+					<!-- WEIGHT TRACKER DIV -->
+						<div id="weightTracker" class="card" style="background-color: transparent;" >
+							<div class="card-body">	
+								<h2> Weight Tracker: </h2>
+								<div class="weightStats">
+								</div>
+								<div>
+									<p><b>Recent Entries:</b></p>
+									<ul class="weightUl">
+										<li><b>Aug. 31:</b> 248lbs</li>
+										<li><b>Oct. 6:</b> 247lbs</li>
+										<li><b>Oct. 13:</b> 244lbs</li>
+									</ul>
+
+								<!-- Button trigger modal -->
+								<button type="button" data-toggle="modal" data-target="#weightModal">
+									Log Entry
+								</button>
+								<button data-purpose="delete" >&times;Delete Last Entry?</button>
+								
+								<!-- Modal -->
+								<div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLongTitle">Enter Current Weight</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+										</div>
+										<div class="modal-body">
+											
+										
+											<form id="weightInput" >
+												<div class="form-group" >
+													<label for="currentweight" class="col-form-label">Current Weight:</label>
+													<input class="form-control" type="number" name="currentweight" placeholder="Enter Weight">
+													<label for="image" class="col-form-label">Upload Image:</label>
+													<input class="form-control" type="text" name="image" placeholder="Image URL">
+													<br><br>
+													<button class="btn btn-info" type="submit" id="log-entry">Log Weight</button>
+												</div>
+											</form>
+										</div>
+										<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+									</div>
+								</div>
+							</div>
+						</div>
+			</div>
+		<br><br><br><br>
+
+		<!-- EXERCISE INFO DIV -->
+			<div id="exerciseInfo">
+				<!-- <ul class="pagination pagination-sm">
+					<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#">Next</a></li>
+				</ul> -->
+			</div>
+			<br><br><br><br><br><br><br>
+
+		<!-- MAIN DIV END -->
 		</div>
-	</div> 
-</div>
-
-<!-- CHART DIV -->
-	<h1 style="text-align: center">Track Your Weight Loss Progress!</h1>
-	<canvas id="myChart" width="400" height="400"></canvas>
+		<br><br><br><br>
+		<div data-aos="slide-left">
+			<h1 style="text-align: center">Upcoming Workouts:</h1>
+			<br>
+			<div class="container">
+				<div class="row">
+					<div id="tomorrowDiv" class="col-sm" style="padding-right: 15px;">
+					</div>
+					<div id="dayAfterTomorrowDiv" class="col-sm" style="padding: 0px, 15px, 0px, 15px; width: 100%;">
+					</div>
+					<div id="threeDaysAfterDiv" class="col-sm" style="padding-left: 15px;">
+					</div>
+				</div>
+			</div> 
+		</div>
 		
+		<br><br><br><br><br><br><br>
+		<!-- CHART DIV -->
+			<h1 style="text-align: center">Track Your Weight Loss Progress!</h1>
+			<canvas id="myChart" width="400" height="400"></canvas>
+				
 
-<!-- END CHART DIV -->
-<br><br><br><br><br><br>
+		<!-- END CHART DIV -->
+		<br><br><br><br><br><br><br>
 
-<!-- PROGRESS DIV -->
-<div style="background-color: black; color: white; width: 100vh; height: max-content;">
-	<h1>See Your Progress!</h1>
-	<br><br>
-	<div id="progressDiv" class="flex-container" data-aos="slide-right" style="background-color: transparent;">
-		<div>
-			<div class="card" style="width: 18rem; margin-left: 50px; background-color: transparent;">
-				<img class="card-img-top" src="https://i.pinimg.com/originals/d5/81/56/d58156add090904b515830cccb6bca60.jpg">
-				<div class="card-body">
-					<h5 class="card-title">August 31</h5>
-				
-					<p class="card-text">Weight: 248 lbs.</p>
-					<p class="card-text">You've Lost: 2 lbs.</p>
-					<p class="card-text">You have 93 lbs left to go!.</p>				
+		<!-- PROGRESS DIV -->
+		<div style="width: 100vh; height: max-content;">
+			<h1>See Your Progress!</h1>
+			<br><br>
+			<div id="progressDiv" class="flex-container" data-aos="slide-right" style="background-color: transparent;">
+				<div>
+					<div class="card" style="width: 18rem; margin-left: 50px; background-color: transparent;">
+						<img class="card-img-top" src="https://i.pinimg.com/originals/d5/81/56/d58156add090904b515830cccb6bca60.jpg">
+						<div class="card-body">
+							<h5 class="card-title">August 31</h5>
+						
+							<p class="card-text">Weight: 248 lbs.</p>
+							<p class="card-text">You've Lost: 2 lbs.</p>
+							<p class="card-text">You have 93 lbs left to go!.</p>				
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="card" style="width: 18rem; margin-left: 50px; background-color: transparent;">
+						<img class="card-img-top" src="https://i.pinimg.com/originals/aa/92/92/aa9292c581705b344aea08ba75bd0af2.jpg">
+						<div class="card-body">
+							<h5 class="card-title">October 6</h5>
+						
+							<p class="card-text">Weight: 247 lbs.</p>
+							<p class="card-text">You've Lost: 3 lbs.</p>
+							<p class="card-text">You have 92 lbs left to go!.</p>				
+						</div>
+					</div>
+				</div>
+				<div>
+					<div class="card" style="width: 18rem; margin-left: 50px; background-color: transparent;">
+						<img class="card-img-top" src="https://i.pinimg.com/originals/b3/94/eb/b394ebdb69a1361b3ea8391b2c104170.jpg">
+						<div class="card-body">
+							<h5 class="card-title">October 13</h5>
+						
+							<p class="card-text">Weight: 244 lbs.</p>
+							<p class="card-text">You've Lost: 6 lbs.</p>
+							<p class="card-text">You have 89 lbs left to go!</p>				
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div>
-			<div class="card" style="width: 18rem; margin-left: 50px; background-color: transparent;">
-				<img class="card-img-top" src="https://i.pinimg.com/originals/aa/92/92/aa9292c581705b344aea08ba75bd0af2.jpg">
-				<div class="card-body">
-					<h5 class="card-title">October 6</h5>
-				
-					<p class="card-text">Weight: 247 lbs.</p>
-					<p class="card-text">You've Lost: 3 lbs.</p>
-					<p class="card-text">You have 92 lbs left to go!.</p>				
+		<br><br><br><br>
+
+		<!-- FOOTER DIV -->
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+			<footer class="footer" style="position: sticky; height: 50px;">
+				<div class="container">
+					<span style="color: black;"> Created by: Ashab A. & Mushfi C.</span>
 				</div>
-			</div>
-		</div>
-		<div>
-			<div class="card" style="width: 18rem; margin-left: 50px; background-color: transparent;">
-				<img class="card-img-top" src="https://i.pinimg.com/originals/b3/94/eb/b394ebdb69a1361b3ea8391b2c104170.jpg">
-				<div class="card-body">
-					<h5 class="card-title">October 13</h5>
-				
-					<p class="card-text">Weight: 244 lbs.</p>
-					<p class="card-text">You've Lost: 6 lbs.</p>
-					<p class="card-text">You have 89 lbs left to go!.</p>				
-				</div>
-			</div>
-		</div>
-	</div>
+			</footer>
+		<!-- END FOOTER DIV -->
+
+<!-- this is userdiv -->
 </div>
-<br><br><br><br>
+<!-- user div end -->
 
-<!-- FOOTER DIV -->
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-	<footer class="footer" style="position: sticky; height: 50px;">
-		<div class="container">
-			<span style="color: black;"> Created by: Ashab A. & Mushfi C.</span>
-		</div>
-	</footer>
-<!-- END FOOTER DIV -->
+
 
 		<script type="text/javascript" src="src/index.js"></script>
 		<!-- Popper JS -->
@@ -511,7 +524,13 @@
 			});
 			</script>
 
-
+			<script>
+				$(document).ready(function(){
+					$(document).click(function(){
+					$("#userDiv").toggle();
+					});
+				});
+		</script>
 </body>
 
 </html>
