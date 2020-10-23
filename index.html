@@ -251,12 +251,14 @@
 					<!-- CALORIES DIV -->
 						<div class="card" style="background-color: transparent;" id="caloriesDiv">
 									<div class="card-body">	
-										<h1 class="card-title">Macro Tracker:</h1>
-											<h3 class="card-subtitle">Macros Left for Today:</h3>
+										<h1 class="card-title" style="text-align:center;" >Macro Tracker</h1>
+										<hr>
+											<h5 class="card-subtitle" style="text-align:center;" >Macros Left for Today</h3>
+												<hr>
 											<div class="macros">
-													<div class="protein"> 200g <b>Protein</b> </div>
-													<div class="carbs"> 140g <b>Carbs</b></div>
-													<div class="fats"> 65g <b>Fats</b></div>
+													<div class="protein" style="text-align:center;"> 200g <b style="text-align:center;">Protein</b> </div>
+													<div class="carbs" style="text-align:center;"> 140g <b style="text-align:center;">Carbs</b></div>
+													<div class="fats" style="text-align:center;"> 65g <b style="text-align:center;">Fats</b></div>
 											</div>
 											<ul>
 											</ul>
@@ -266,6 +268,13 @@
 													<input class="col"type="text" placeholder="Fats" name="fats" >
 													<button type="submit" id="log-macros">Log Macros</button>
 											</form>
+											<hr>
+											<div style="text-align:center;">
+												<h5>Suggested Daily kCals </h5>
+												<h4 id="calories">1800</h4>
+												<hr>
+												<p><b>Remaining calories after log:</b></p>
+											</div>
 									</div>
 						</div>
 					<!-- WORKOUT DIV -->
@@ -281,11 +290,14 @@
 					<!-- WEIGHT TRACKER DIV -->
 						<div id="weightTracker" class="card" style="background-color: transparent;" >
 							<div class="card-body">	
-								<h2> Weight Tracker: </h2>
-								<div class="weightStats">
+								<h1 style="text-align:center;"> Weight Tracker </h1>
+								<hr>
+								<div class="weightStats" style="text-align:center;">
 								</div>
+								<hr>
 								<div>
-									<p><b>Recent Entries:</b></p>
+									<p style="text-align:center;"><b>Recent Entries</b></p>
+									<hr>
 									<ul class="weightUl">
 										<li><b>Aug. 31:</b> 248lbs</li>
 										<li><b>Oct. 6:</b> 247lbs</li>
@@ -296,7 +308,7 @@
 								<button type="button" data-toggle="modal" data-target="#weightModal">
 									Log Entry
 								</button>
-								<button data-purpose="delete" >&times;Delete Last Entry?</button>
+								<button id="delete" data-purpose="delete" >&times;Delete Last?</button>
 								
 								<!-- Modal -->
 								<div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -352,8 +364,8 @@
 		</div>
 		<br><br><br><br>
 		<div data-aos="flip-up">
-			<h1 style="text-align: center">Upcoming Workouts:</h1>
-			<br>
+			<h1 style="text-align: center">Upcoming Workouts</h1>
+			<hr>
 			<div class="container">
 				<div class="row">
 					<div id="tomorrowDiv" class="col-sm" style="padding-right: 15px;">
@@ -368,7 +380,8 @@
 		
 		<br><br><br><br><br><br><br>
 		<!-- CHART DIV -->
-			<h1 style="text-align: center">Track Your Weight Loss Progress!</h1>
+			<h1 style="text-align: center">Visualize Your Weight Loss </h1>
+			<hr>
 			<canvas id="myChart" width="400" height="400"></canvas>
 				
 
@@ -377,14 +390,15 @@
 
 		<!-- PROGRESS DIV -->
 		<div style="width: 100vh; height: max-content;">
-			<h1>See Your Progress!</h1>
-			<br><br>
+			<h1 style="text-align: center">See Your Progress</h1>
+			<hr>
 			<div id="progressDiv" class="flex-container" data-aos="flip-up" style="background-color: transparent;">
 				<div>
 					<div class="card" style="width: 20rem; overflow: auto; max-height: 800px; margin-left: 50px; background-color: transparent;">
 						<img class="card-img-top" src="https://i.pinimg.com/originals/d5/81/56/d58156add090904b515830cccb6bca60.jpg">
 						<div class="card-body" style="overflow: scroll; max-height: 800px;">
-							<h5 class="card-title">August 31</h5>
+							<h5 class="card-title" style="text-align: center">August 31</h5>
+							<hr>
 							<p class="card-text">Weight: <strong>248lbs.</strong> You've Lost: <strong>2lbs</strong>. You have <strong>93lbs</strong> left to go!</p>
 							<p class="card-text">I felt amazing today! </p>				
 				
@@ -395,7 +409,8 @@
 					<div class="card" style="width: 20rem; overflow: auto; max-height: 800px; margin-left: 50px; background-color: transparent;">
 						<img class="card-img-top" src="https://i.pinimg.com/originals/aa/92/92/aa9292c581705b344aea08ba75bd0af2.jpg">
 						<div class="card-body" style="overflow: scroll; max-height: 800px;">
-							<h5 class="card-title">October 6</h5>
+							<h5 class="card-title" style="text-align: center">October 6</h5>
+							<hr>
 							<p class="card-text">Weight: <strong>247lbs.</strong> You've Lost: <strong>3lbs</strong>. You have <strong>92lbs</strong> left to go!</p>
 							<p class="card-text">It was a rough week but I got through it.</p>				
 							
@@ -406,7 +421,8 @@
 					<div class="card" style="width: 20rem; overflow: auto; max-height: 800px; margin-left: 50px; background-color: transparent;">
 						<img class="card-img-top" src="https://i.pinimg.com/originals/b3/94/eb/b394ebdb69a1361b3ea8391b2c104170.jpg">
 						<div class="card-body" style="overflow: scroll; max-height: 800px;">
-							<h5 class="card-title">October 13</h5>
+							<h5 class="card-title" style="text-align: center">October 13</h5>
+							<hr>
 							<p class="card-text">Weight: <strong>244lbs.</strong> You've Lost: <strong>6lbs</strong>. You have <strong>89lbs</strong> left to go!</p>
 							<p class="card-text">So happy with my weigh in!</p>				
 								

@@ -68,12 +68,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		if(tomorrow === "Saturday" || tomorrow === "Sunday" || tomorrow === "Tuesday" || tomorrow === "Thursday") {
 			tomorrowDiv.innerHTML = `
 			<h3 style="text-align:center;"> Rest Day </h3>
+			<hr>
 			<p> Try for some light cardio if you're up for it! </p>
 			`
 		} else {
 			tomorrowDiv.innerHTML = `
 				<h3 style="text-align:center;">${tomorrow}</h3>
-				<br>
+				<hr>
 				<p class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
 				<p class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
 				<p class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> 
@@ -99,12 +100,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		if(dayAfterTomorrow === "Saturday" || dayAfterTomorrow === "Sunday" || dayAfterTomorrow === "Tuesday" || dayAfterTomorrow === "Thursday") {
 			dayAfterTomorrowDiv.innerHTML = `
 			<h3 style="text-align:center;"> Rest Day </h3>
+			<hr>
 			<p> Try for some light cardio if you're up for it! </p>
 			`
 		} else {
 		dayAfterTomorrowDiv.innerHTML = `
 			<h3 style="text-align:center;">${dayAfterTomorrow}</h3>
-			<br>
+			<hr>
 			<p class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
 			<p class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
 			<p class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> 
@@ -130,12 +132,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		if(threeDaysAfter === "Saturday" || threeDaysAfter === "Sunday" || threeDaysAfter === "Tuesday" || threeDaysAfter === "Thursday") {
 			threeDaysAfterDiv.innerHTML = `
 			<h3 style="text-align:center;"> Rest Day </h3>
+			<hr>
 			<p> Try for some light cardio if you're up for it! </p>
 			`
 		} else {
 			threeDaysAfterDiv.innerHTML = `
 			<h3 style="text-align:center;">${threeDaysAfter}</h3>
-			<br>
+			<hr>
 			<p class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
 			<p class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> 
 			<p class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> 
@@ -168,19 +171,21 @@ document.addEventListener("DOMContentLoaded", function() {
 			const fullBodySample2 = random_exercises(fullBody)
 		
 			workoutDiv.innerHTML = `
-			<h2 class="card-title">Workout Tracker:</h2>
-			<h3 style="text-align:center;">${n}</h3>
+			<h1 class="card-title" style="text-align:center;">Workout Tracker:</h1 >
+			<hr>
+			<h5 style="text-align:center;">${n}</h5>
+			<hr>
 			<h4 style="text-align:center;"> <b> Rest for 3 minutes after each set!</b> </h4>
+			<hr>
+			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
 			<br>
-			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<br> no
-			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
+			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
 			<br>
-			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 2 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
+			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 2 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
 			<br>
-			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
+			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
 			<br>
-			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample2.id}"><b class="workout-p" data-exercise-id="${fullBodySample2.id}">${fullBodySample2.exercise}</b>: 1 Set until failure </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
+			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample2.id}"><b class="workout-p" data-exercise-id="${fullBodySample2.id}">${fullBodySample2.exercise}</b>: 1 Set until failure </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
 			<br>
 
 			`
@@ -202,21 +207,22 @@ document.addEventListener("DOMContentLoaded", function() {
 			const coreSample = random_exercises(core)
 			
 			workoutDiv.innerHTML = `
-			<h2 class="card-title">Workout Tracker:</h2>
-			<h3 style="text-align:center;">${n}</h3>
+			<h1 class="card-title" style="text-align:center;">Workout Tracker:</h1 >
+			<hr>
+			<h5 style="text-align:center;">${n}</h5>
+			<hr>
 			<h4 style="text-align:center;"> <b>Rest for 1 minute after each set!</b> </h4>
-			<br>
-			<p class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<p class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<p class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<p class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<p class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 1 Set until failure </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<br>
-			<ul class="pagination pagination-sm justify-content-end" style="margin:20px 0">
-				<li class="page-item" ><a id="prev-btn" class="page-link" href="#">Previous</a></li>
-			
-				<li class="page-item" ><a id="next-btn" class="page-link" href="#">Next</a></li>
-			</ul>
+			<hr>
+			<p style="text-align:center;" class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> <button type="button" class="btn btn-outline-dark btn-sm">Done?</button>
+			<hr>
+			<p style="text-align:center;" class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> <button type="button" class="btn btn-outline-dark btn-sm">Done?</button>
+			<hr>
+			<p style="text-align:center;" class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> <button type="button" class="btn btn-outline-dark btn-sm" >Done?</button>
+			<hr>
+			<p style="text-align:center;" class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p> <button type="button" class="btn btn-outline-dark btn-sm">Done?</button>
+			<hr>
+			<p style="text-align:center;" class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 1 Set until failure </p> <button type="button" class="btn btn-outline-dark btn-sm">Done?</button>
+
 			`
 			workoutDiv.appendChild(workout)
 		} else if (n === "Monday") {
@@ -236,15 +242,17 @@ document.addEventListener("DOMContentLoaded", function() {
 	
 			
 			workoutDiv.innerHTML = `
-			<h2 class="card-title">Workout Tracker:</h2>
-			<h3 style="text-align:center;">${n}</h3>
+			<h1 class="card-title" style="text-align:center;">Workout Tracker:</h1 >
+			<hr>
+			<h5 style="text-align:center;">${n}</h5>
+			<hr>
 			<h4 style="text-align:center;"> <b>Rest for 2 minutes after each set!</b> </h4>
-			<br>
-			<p class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<p class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<p class="workout-p" data-exercise-id="${back.id}"><b class="workout-p" data-exercise-id="${back.id}">${back.exercise}</b>: 2 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<p class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 2 Sets - 10-12 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
-			<p class="workout-p" data-exercise-id="${legsSample2.id}"><b class="workout-p" data-exercise-id="${legsSample2.id}">${legsSample2.exercise}</b>: 1 Set until failure </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-info">Done?</span>
+			<hr>
+			<p class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
+			<p class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
+			<p class="workout-p" data-exercise-id="${back.id}"><b class="workout-p" data-exercise-id="${back.id}">${back.exercise}</b>: 2 Sets - 6-10 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
+			<p class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 2 Sets - 10-12 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
+			<p class="workout-p" data-exercise-id="${legsSample2.id}"><b class="workout-p" data-exercise-id="${legsSample2.id}">${legsSample2.exercise}</b>: 1 Set until failure </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
 			<br>
 			<ul class="pagination pagination-sm justify-content-end" style="margin:20px 0">
 				<li class="page-item" ><a id="prev-btn" class="page-link" href="#">Previous</a></li>
@@ -256,8 +264,11 @@ document.addEventListener("DOMContentLoaded", function() {
 		} else {
 			const workoutDiv = document.querySelector("#workoutDiv")
 			workoutDiv.innerHTML = `
-			<h1> Rest Day </h1>
-			<strong> Try for some light cardio if you're up for it! </strong>
+			<h1 style="text-align:center;"> Today's Workout </h1>
+			<hr>
+			<h5 style="text-align:center;"> Rest Day </h5>
+			<hr>
+			<p> Try for some light cardio if you're up for it! </p>
 			<p> Resting up is just dandy though, you're doing great!</p>
 			`
 		}
@@ -296,11 +307,12 @@ document.addEventListener("DOMContentLoaded", function() {
 	const renderUserWeightDiv = (user) => {
 		const stats = document.querySelector(".weightStats")
 		stats.innerHTML = `
-		<h5 style="text-align:center;">GOAL WEIGHT: ${user.goalWeight} lbs.</h5>
-		<p>Starting Weight: ${user.startingWeight} lbs.</p>
-		<p>Current Weight: ${user.currentWeight.slice(-1)} lbs.</p>
-		<p>Pounds Lost: ${user.startingWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
-		<p>Pounds Left: ${user.goalWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
+		<h5 style="text-align:center;">Goal Weight: ${user.goalWeight} lbs.</h5>
+		<hr>
+		<p> <b>Starting Weight:</b> ${user.startingWeight} lbs.</p>
+		<p> <b>Current Weight:</b> ${user.currentWeight.slice(-1)} lbs.</p>
+		<p> <b>Pounds Lost:</b> ${user.startingWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
+		<p> <b>Pounds Left:</b> ${parseInt(user.currentWeight.slice(-1)) - user.goalWeight} lbs.</p>
 		
 		`
 	}
@@ -501,28 +513,43 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	const updateMacros = (proteinInput, carbsInput, fatsInput) => {
-		protein = parseInt(document.querySelector(".protein").innerText)
-		proteinInputInt = parseInt(proteinInput)
-		carbs = parseInt(document.querySelector(".carbs").innerText)
-		carbsInputInt = parseInt(carbsInput)
-		fats = parseInt(document.querySelector(".fats").innerText)
-		fatsInputInt = parseInt(fatsInput)
+		let protein = parseInt(document.querySelector(".protein").innerText)
+		let proteinInputInt = parseInt(proteinInput)
+		let carbs = parseInt(document.querySelector(".carbs").innerText)
+		let carbsInputInt = parseInt(carbsInput)
+		let fats = parseInt(document.querySelector(".fats").innerText)
+		let fatsInputInt = parseInt(fatsInput)
+
 
 		document.querySelector(".protein").innerHTML = `${protein - proteinInputInt}g Protein`
 		document.querySelector(".carbs").innerHTML = `${carbs - carbsInputInt}g Carbs`
 		document.querySelector(".fats").innerHTML = `${fats - fatsInputInt}g Fats`
 		
+		let totalCalories = parseInt(document.getElementById("calories").textContent)
+		
+		let caloriesFromCarbs = carbsInputInt * 4
+		let caloriesFromFats = fatsInputInt * 9
+		let caloriesFromProtein = proteinInputInt * 4
+		
+		let caloriesFromMacrosSum = caloriesFromCarbs + caloriesFromFats + caloriesFromProtein
+
+		document.getElementById("calories").textContent = totalCalories - caloriesFromMacrosSum
+
 	}
 
 	
 
-	// const clickHandler = () => {
-	// 	document.addEventListener('click', e =>{
-	// 		const target = e.target
-			
-	// 	})
+	const clickHandler = () => {
+		document.addEventListener('click', (e) => {
+			if (e.target.matches(`[data-purpose="delete"]`)) {
+				
+				const removeWeightUl = document.querySelector(".weightUl")
+				removeWeightUl.lastElementChild.remove()
+				document.querySelector("#progressDiv").lastElementChild.remove()
 
-	// }
+			}
+		})
+	}
 
 	// if(e.target.matches(".workout-p")){
 	// 	const workout = e.target
@@ -572,7 +599,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		$('#exerciseModal').modal('show');
 	})
 
-	// clickHandler();
+	clickHandler();
 	submitHandler();
 	getExercises();
 	getUser();
