@@ -115,7 +115,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<p id="remainingCalories"></p>
 				`
 			} else if(goalContent === "Maintain Weight"){
 				calorieInformation.innerHTML = `
@@ -123,7 +122,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<p id="remainingCalories"></p>
 				`
 			} else if(goalContent === "Gain Muscle"){
 				calorieInformation.innerHTML = `
@@ -131,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<p id="remainingCalories"></p>
 				`
 			}
 		} else if(sexValue === "female") {
@@ -144,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<p id="remainingCalories"></p>
 				`
 			} else if(goalContent === "Maintain Weight"){
 				calorieInformation.innerHTML = `
@@ -152,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<p id="remainingCalories"></p>
 				`
 			} else if(goalContent === "Gain Muscle"){
 				calorieInformation.innerHTML = `
@@ -160,7 +155,6 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<p id="remainingCalories"></p>
 				`
 			}
 		}
@@ -448,6 +442,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			e.preventDefault()
 			if(e.target.matches("#weightInput")) {
 				const weightForm = document.getElementById('weightInput')
+				console.log(e.target)
 				const currentWeight = weightForm.currentweight.value
 				const img = weightForm.image.value
 				const notes = weightForm.notes.value
@@ -620,7 +615,10 @@ document.addEventListener("DOMContentLoaded", function() {
 				removeWeightUl.lastElementChild.remove()
 				document.querySelector("#progressDiv").lastElementChild.remove()
 
+			} else if (e.target.matches(`[data-target="#weightModal"]`)) {
+				console.log(e.target)
 			}
+
 		})
 	}
 

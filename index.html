@@ -16,13 +16,15 @@
 			$(document).ready(function(){
 				$("#userDiv").hide();
 			});
-		</script>
+			$(document).on("click", "#submit_btn", function(event){
+    alert( "GO" ); 
+});</script>
 		
 		<script>
 			$(document).ready(function() {
 				$("#mainForm").on("submit",function(){
 					$("#userForm").hide();
-					$("#userDiv").show(1000).fade();
+					$("#userDiv").show(1000);
 				})
 			})
 		</script>
@@ -252,6 +254,7 @@
 													<hr>
 													<div id="calorieInformation" style="text-align:center;">
 													</div>
+													<p id="calories"></p>
 									</div>
 								</div>
 							<!-- WORKOUT DIV -->
@@ -276,7 +279,6 @@
 															<button type="button" data-toggle="modal" data-target="#weightModal">
 																Log Entry
 															</button>
-															<button id="delete" data-purpose="delete" >Delete Last?</button>
 															<!-- Modal -->
 															<div class="modal fade" id="weightModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 																<div class="modal-dialog modal-dialog-centered" role="document">
@@ -305,6 +307,8 @@
 																	</div>
 																</div>
 															</div>
+															<button id="delete" data-purpose="delete" >Delete Last?</button>
+
 									</div>
 								</div>
 								</div>
@@ -319,11 +323,9 @@
 							</div>		
 						<!-- EXERCISE INFO MODAL -->
 
-				<br><br><br><br><br><br><br>
+				<br><br><br><br>
 
 			<!-- MAIN DIV END -->
-
-				<br><br><br><br>
 				<div data-aos="flip-up">
 					<h1 style="text-align: center">Upcoming Workouts</h1>
 					<hr>
@@ -354,8 +356,8 @@
 					<h1 style="text-align: center">See Your Progress</h1>
 					<hr>
 					<div id="progressDiv" class="flex-container" data-aos="flip-up" style="background-color: transparent;">
-							<!--
-							<div>
+							
+							<!-- <div>
 								<div class="card" style="width: 20rem; overflow: auto; max-height: 800px; margin-left: 50px; background-color: transparent;">
 									<img class="card-img-top" src="https://i.pinimg.com/originals/d5/81/56/d58156add090904b515830cccb6bca60.jpg">
 									<div class="card-body" style="overflow: scroll; max-height: 800px;">
