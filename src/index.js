@@ -93,7 +93,8 @@ document.addEventListener("DOMContentLoaded", function() {
 			fetch(userUrl, options)
 			.then(response => response.json())
 			.then(user => {
-				getUser(user)
+				getUser(user),
+				renderChart(user)
 			})
 			
 
@@ -449,10 +450,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		<hr>
 		<p> <b>Starting Weight:</b> ${user.startingWeight} lbs.</p>
 		<p> <b>Current Weight:</b> ${user.currentWeight.slice(-1)} lbs.</p>
-		<p> <b>Pounds Lost:</b> ${user.startingWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
+		<p id="alert"> <b>Pounds Lost:</b> ${user.startingWeight - parseInt(user.currentWeight.slice(-1))} lbs.</p>
 		<p> <b>Pounds Left:</b> ${parseInt(user.currentWeight.slice(-1)) - user.goalWeight} lbs.</p>
-		
 		`
+		// const alert = parseInt(document.getElementsById("alert"))
+		// if(alert > 10) {
+
+		// }
 	}
 
 	const modalHandler = () => {
@@ -460,7 +464,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		form.addEventListener('submit', e => {
 			e.preventDefault()
 			if(e.target.matches("#weightInput")) {
-				console.log(e.target)
+				
 				const currentWeight = form.currentweight.value
 				const img = form.image.value
 				const notes = form.notes.value
@@ -513,62 +517,10 @@ document.addEventListener("DOMContentLoaded", function() {
 				fetch(userUrl, options)
 				.then(response => response.json())
 				.then(user => {
-					addCurrentWeightLi(user, img, notes),
 					getUser(),
-					renderChart()
+					addCurrentWeightLi(user, img, notes)
 				})
 	}
-
-	// const renderChart = () => {
-	// const ctx = document.getElementById('myChart');
-	// 		const myChart = new Chart(ctx, {
-	// 			type: 'line',
-	// 			data: {
-	// 				labels: [],
-	// 				datasets: [{
-	// 					label: 'Current Weight',
-	// 					data: [],
-	// 					backgroundColor: [
-	// 						'rgba(255, 99, 132, 0.2)',
-	// 						'rgba(54, 162, 235, 0.2)',
-	// 						'rgba(255, 206, 86, 0.2)',
-	// 						'rgba(75, 192, 192, 0.2)',
-	// 						'rgba(153, 102, 255, 0.2)',
-	// 						'rgba(255, 159, 64, 0.2)'
-	// 					],
-	// 					borderColor: [
-	// 						'rgba(255, 99, 132, 1)',
-	// 						'rgba(54, 162, 235, 1)',
-	// 						'rgba(255, 206, 86, 1)',
-	// 						'rgba(75, 192, 192, 1)',
-	// 						'rgba(153, 102, 255, 1)',
-	// 						'rgba(255, 159, 64, 1)'
-	// 					],
-	// 					borderWidth: 1
-	// 				}]
-	// 			},
-	// 			options: {
-	// 				scales: {
-	// 					yAxes: [{
-	// 						ticks: {
-	// 							beginAtZero: true
-	// 						}
-	// 					}]
-	// 				}
-	// 			}
-	// 		});
-
-			
-	// 		renderUser();
-	// 	}
-
-	// const renderUser = () => {
-	// 	fetch(userUrl)
-	// 	.then(response => response.json())
-	// 	.then(user => {
-	// 		myChart.data["datasets"]["data"] = user.currentWeight
-	// 	})
-	// }
 
 	const addCurrentWeightLi = (user, img, notes) => {
 		const weightUl = document.querySelector(".weightUl")
@@ -578,10 +530,31 @@ document.addEventListener("DOMContentLoaded", function() {
 		<b>${months[d.getMonth()]} ${d.getDate()}:</b> ${user.currentWeight.slice(-1)} lbs.
 		`
 
-		weightUl.append(newLi)
+		weightUl.appendChild(newLi)
 		
 		renderProgressCard(user, img, notes)
-		renderChart
+	}
+
+	const renderChart = (user) => {
+		const dataArray = []
+		for(let weight of user.currentWeight) {
+			dataArray.push(weight)
+		}
+
+		let myChart = document.getElementById("myChart").getContext("2d");
+
+		let lineChart = new Chart(myChart, {
+			type: "line",
+			data: {
+				labels: ["Oct. 23", "Oct.23", "Oct.23", "Oct.23"], 
+				datasets: [{
+					label: "Weight",
+					data: [ 249, 247, 246, 243],
+					color: "navy"
+				}]
+			},
+			options: {}
+		});
 	}
 
 	const renderProgressCard = (user, img, notes) => {
@@ -645,8 +618,12 @@ document.addEventListener("DOMContentLoaded", function() {
 				
 				fetch(exUrl + exerciseClickId)
 				.then(response => response.json())
-				.then(exercise => console.log(exercise))
-				
+				.then(exercise => {
+					renderExerciseInfo(exercise)
+				})
+			} else if (e.target.matches("#closeTestDiv")){
+				const testEx = document.querySelector(".testDiv")
+				testEx.remove()
 			}
 
 		})
@@ -667,36 +644,41 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	const renderExerciseInfo = exercise => {
-		exerciseInfoDiv.innerHTML = `
+		let homeDiv = document.querySelector("#homediv")
+		const testEx = document.querySelector(".testDiv")
+		testEx.innerHTML = `
 			<div class="modal-fade" id="exerciseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="exampleModalLongTitle">${exercise.exercise}</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<button id="closeTestDiv" type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
 						<div class="modal-body">
 						<img src="${exercise.example}">
-						<p>${exercise.exerciseType}</p>
-						<p>${exercise.equipment}</p>
-						<p>${exercise.majorMuscle}</p>
-						<p>${exercise.minorMuscle}</p>
-						<p>${exercise.notes}</p>
-						<p>${exercise.modifications}</p>
+						<p> <b>Type:</b> ${exercise.exerciseType}</p>
+						<hr>
+						<p> <b>Equipment:</b> ${exercise.equipment}</p>
+						<hr>
+						<p> <b>Major-Muscle:</b> ${exercise.majorMuscle}</p>
+						<hr>
+						<p> <b>Minor-Muscle:</b> ${exercise.minorMuscle}</p>
+						<hr>
+						<p> <b>Notes:</b> ${exercise.notes}</p>
+						<hr>
+						<p> <b>Modifications:</b> ${exercise.modifications}</p>
 						</div>
-					<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					</div>
 			</div>
 			`
-	}
+			homeDiv.append(testEx)
+			}
 
-	$("#navbar_register_btn").on("click",function(e){
-		e.preventDefault();
-		$('#navModal').modal('show');
-	})
+	// $("#navbar_register_btn").on("click",function(e){
+	// 	e.preventDefault();
+	// 	$('#navModal').modal('show');
+	// })
 
 	$(".workout-p").on("click",function(e){
 		e.preventDefault();
