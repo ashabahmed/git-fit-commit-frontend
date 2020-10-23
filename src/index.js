@@ -100,9 +100,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			let dailyCalories = parseInt(document.querySelector("#dailyCalories").innerText)
 
 			let dailyProtein = document.querySelector("#proteinDaily")
-			let roundedProteinInitial = Math.round((dailyCalories*0.4)/4)
-			let roundedCarbsInitial = Math.round((dailyCalories*0.4)/4)
-			let roundedFatsInitial = Math.round((dailyCalories*0.2)/9)
+
 
 			dailyProtein.innerHTML = `
 			<p id="dailyProteinPTag" style="text-align:center;"> ${Math.round((dailyCalories*0.4)/4)}g <b>Protein</b> </p> 
@@ -137,10 +135,8 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h5>Suggested Daily Calories For ${goalContent} </h5>
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
-				<p><b>Remaining calories after log:</b></p>
-				<div id="remainingCaloriesProtein"></div>
-				<div id="remainingCaloriesCarbs"></div>
-				<div id="remainingCaloriesFats"></div>
+				<h5><b>Remaining Calories:</b></h5>
+				<h4 id="updatedCalories"> </h4>
 				
 				`
 			} else if(goalContent === "Maintain Weight"){
@@ -149,9 +145,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<div id="remainingCaloriesProtein"></div>
-				<div id="remainingCaloriesCarbs"></div>
-				<div id="remainingCaloriesFats"></div>
+
 				`
 			} else if(goalContent === "Gain Muscle"){
 				calorieInformation.innerHTML = `
@@ -159,9 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<div id="remainingCaloriesProtein"></div>
-				<div id="remainingCaloriesCarbs"></div>
-				<div id="remainingCaloriesFats"></div>
+
 				`
 			}
 		} else if(sexValue === "female") {
@@ -174,9 +166,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<div id="remainingCaloriesProtein"></div>
-				<div id="remainingCaloriesCarbs"></div>
-				<div id="remainingCaloriesFats"></div>
+
 				`
 			} else if(goalContent === "Maintain Weight"){
 				calorieInformation.innerHTML = `
@@ -184,9 +174,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<div id="remainingCaloriesProtein"></div>
-				<div id="remainingCaloriesCarbs"></div>
-				<div id="remainingCaloriesFats"></div>
+
 				`
 			} else if(goalContent === "Gain Muscle"){
 				calorieInformation.innerHTML = `
@@ -194,9 +182,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
-				<div id="remainingCaloriesProtein"></div>
-				<div id="remainingCaloriesCarbs"></div>
-				<div id="remainingCaloriesFats"></div>
+
 				`
 			}
 		}
@@ -205,11 +191,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	const renderName = (user) => {
 		const navBar = document.querySelector("#navBarName")
 		navBar.innerHTML = `
-		<h1>
+		<h1 style="color: white">
 			<img src="src/gitfitlogo.png" width="45px" height="45px"  alt="">
 			Git Fit. Git Commit.
-			Logged in as: ${user.name}
 		</h1>
+		<h5 style="text-align: center; color: white">Logged in as: ${user.name}</h5>
 		`
 	}
 
@@ -379,21 +365,21 @@ document.addEventListener("DOMContentLoaded", function() {
 			const coreSample = random_exercises(core)
 			
 			workoutDiv.innerHTML = `
-			<h1 class="card-title" style="text-align:center;">Workout Tracker</h1 >
-			<hr>
-			<h5 style="text-align:center;">${n}</h5>
-			<hr>
-			<h4 style="text-align:center;"> <b>Rest for 1 minute after each set!</b> </h4>
-			<hr>
-			<p style="text-align:center;" class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> Done? <input type="checkbox" id="done?"> 
-			<hr>
-			<p style="text-align:center;" class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> Done? <input type="checkbox" id="done?">
-			<hr>
-			<p style="text-align:center;" class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> Done? <input type="checkbox" id="done?"> 
-			<hr>
-			<p style="text-align:center;" class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p> Done? <input type="checkbox" id="done?">
-			<hr>
-			<p style="text-align:center;" class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 1 Set until failure </p> Done? <input type="checkbox" id="done?"> 
+				<h1 class="card-title" style="text-align:center;">Workout Tracker</h1 >
+				<hr>
+				<h5 style="text-align:center;">${n}</h5>
+				<hr>
+				<h4 style="text-align:center;"> <b>Rest for 1 minute after each set!</b> </h4>
+				<hr>
+				<p style="text-align:center;" class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> Done? <input type="checkbox" id="done?"> 
+				<hr>
+				<p style="text-align:center;" class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> Done? <input type="checkbox" id="done?">
+				<hr>
+				<p style="text-align:center;" class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> Done? <input type="checkbox" id="done?"> 
+				<hr>
+				<p style="text-align:center;" class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p> Done? <input type="checkbox" id="done?">
+				<hr>
+				<p style="text-align:center;" class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 1 Set until failure </p> Done? <input type="checkbox" id="done?"> 
 
 			`
 			workoutDiv.appendChild(workout)
@@ -499,9 +485,9 @@ document.addEventListener("DOMContentLoaded", function() {
 			if(e.target.matches("#caloriesInput")) {
 			
 				const macrosForm = document.getElementById('caloriesInput')
-				const proteinInput = macrosForm.protein.value
-				const carbsInput = macrosForm.carbs.value
-				const fatsInput = macrosForm.fats.value
+				const proteinInput = parseInt(macrosForm.protein.value)
+				const carbsInput = parseInt(macrosForm.carbs.value)
+				const fatsInput = parseInt(macrosForm.fats.value)
 				macrosForm.reset()
 
 				updateMacros(proteinInput, carbsInput, fatsInput)
@@ -626,17 +612,17 @@ document.addEventListener("DOMContentLoaded", function() {
 	const updateMacros = (proteinInput, carbsInput, fatsInput) => {
 		const calorieInformation = document.querySelector("#calorieInformation")
 		let dailyCalories = parseInt(document.querySelector("#dailyCalories").innerText)
-		
-		let proteinInputInt = parseInt(proteinInput)
-		let carbsInputInt = parseInt(carbsInput)
-		let fatsInputInt = parseInt(fatsInput)
+		let updatedCalories = ((dailyCalories)-((proteinInput*4)+(carbsInput*4)+(fatsInput*9)))
+		const updated = document.querySelector("#updatedCalories")
+		updated.innerText = updatedCalories
+
 		const dailyProtein = parseInt(document.getElementById("dailyProteinPTag").innerText)
 		const dailyCarbs = parseInt(document.getElementById("dailyCarbsPTag").innerText)
 		const dailyFats = parseInt(document.getElementById("dailyFatsPTag").innerText)
 
-			let roundedProtein = Math.round(dailyProtein - proteinInputInt)
-			let roundedCarbs = Math.round(dailyCarbs - carbsInputInt)
-			let roundedFats = Math.round(dailyFats - fatsInputInt)
+			let roundedProtein = Math.round(dailyProtein - proteinInput)
+			let roundedCarbs = Math.round(dailyCarbs - carbsInput)
+			let roundedFats = Math.round(dailyFats - fatsInput)
 
 		document.querySelector("#dailyProteinPTag").innerHTML = `${roundedProtein}g Protein`
 		document.querySelector("#dailyCarbsPTag").innerHTML = `${roundedCarbs}g Carbs`
@@ -655,8 +641,12 @@ document.addEventListener("DOMContentLoaded", function() {
 				document.querySelector("#progressDiv").lastElementChild.remove()
 
 			} else if (e.target.matches('.workout-p')) {
-				const exerciseClickId = e.target.dataset.exerciseInfoDiv
-				console.log(exerciseClickId)
+				const exerciseClickId = e.target.dataset.exerciseId
+				
+				fetch(exUrl + exerciseClickId)
+				.then(response => response.json())
+				.then(exercise => console.log(exercise))
+				
 			}
 
 		})
