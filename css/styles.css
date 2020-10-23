@@ -1,3 +1,11 @@
+.navbar-nav {
+  text-align: center;
+  height: 100px;
+  background-color: navy;
+  text-shadow: whitesmoke;
+}
+
+
 .container-fluid {
   display: flex;
   flex-direction: column;

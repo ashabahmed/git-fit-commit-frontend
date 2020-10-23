@@ -22,10 +22,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	let dayAfterTomorrow = weekday[d.getDay() + 2]
 	let threeDaysAfter = weekday[d.getDay() + 3]
 	let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Oct.", "November", "December"]	
-	function addDarkmodeWidget() {
-		new Darkmode().showWidget();
-		}
-	window.addEventListener('load', addDarkmodeWidget);
 // 
 // 
 // 
@@ -98,7 +94,33 @@ document.addEventListener("DOMContentLoaded", function() {
 			.then(response => response.json())
 			.then(user => {
 				getUser(user)
-			})	
+			})
+			
+
+			let dailyCalories = parseInt(document.querySelector("#dailyCalories").innerText)
+
+			let dailyProtein = document.querySelector("#proteinDaily")
+			let roundedProteinInitial = Math.round((dailyCalories*0.4)/4)
+			let roundedCarbsInitial = Math.round((dailyCalories*0.4)/4)
+			let roundedFatsInitial = Math.round((dailyCalories*0.2)/9)
+
+			dailyProtein.innerHTML = `
+			<p id="dailyProteinPTag" style="text-align:center;"> ${Math.round((dailyCalories*0.4)/4)}g <b>Protein</b> </p> 
+			<hr>
+			`
+
+			let dailyCarbs = document.querySelector("#carbsDaily")
+			dailyCarbs.innerHTML = `
+			<p id="dailyCarbsPTag" style="text-align:center;"> ${Math.round((dailyCalories*0.4)/4)}g <b>Carbs</b> </p> 
+			<hr>
+			`
+		
+			let dailyFats = document.querySelector("#fatsDaily")
+			dailyFats.innerHTML = `
+			<p id="dailyFatsPTag" style="text-align:center;"> ${Math.round((dailyCalories*0.2)/9)}g <b>Fats</b> </p> 
+			<hr>
+			`
+
 		}
 	)}
 
@@ -106,8 +128,9 @@ document.addEventListener("DOMContentLoaded", function() {
 		const calorieInformation = document.querySelector("#calorieInformation")
 		const startingWeightParsed = parseInt(startingWeight)
 		if(sexValue === "male") {
-			const unrounded = (10*startingWeightParsed*0.453592)+((6.25*height)-(5*age+5))
+			const unrounded = (10*startingWeightParsed*0.453592)+((6.25*height)-(5*age+5))  
 			const rounded = Math.round(unrounded / 10) * 10;
+
 			const tdee = rounded*activityLevelValue
 			if(goalContent === "Lose Weight"){
 				calorieInformation.innerHTML = `
@@ -115,6 +138,10 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
+				<div id="remainingCaloriesProtein"></div>
+				<div id="remainingCaloriesCarbs"></div>
+				<div id="remainingCaloriesFats"></div>
+				
 				`
 			} else if(goalContent === "Maintain Weight"){
 				calorieInformation.innerHTML = `
@@ -122,6 +149,9 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
+				<div id="remainingCaloriesProtein"></div>
+				<div id="remainingCaloriesCarbs"></div>
+				<div id="remainingCaloriesFats"></div>
 				`
 			} else if(goalContent === "Gain Muscle"){
 				calorieInformation.innerHTML = `
@@ -129,6 +159,9 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
+				<div id="remainingCaloriesProtein"></div>
+				<div id="remainingCaloriesCarbs"></div>
+				<div id="remainingCaloriesFats"></div>
 				`
 			}
 		} else if(sexValue === "female") {
@@ -141,6 +174,9 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
+				<div id="remainingCaloriesProtein"></div>
+				<div id="remainingCaloriesCarbs"></div>
+				<div id="remainingCaloriesFats"></div>
 				`
 			} else if(goalContent === "Maintain Weight"){
 				calorieInformation.innerHTML = `
@@ -148,6 +184,9 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
+				<div id="remainingCaloriesProtein"></div>
+				<div id="remainingCaloriesCarbs"></div>
+				<div id="remainingCaloriesFats"></div>
 				`
 			} else if(goalContent === "Gain Muscle"){
 				calorieInformation.innerHTML = `
@@ -155,6 +194,9 @@ document.addEventListener("DOMContentLoaded", function() {
 				<h4 id="dailyCalories">${tdee+goalValue}</h4>
 				<hr>
 				<p><b>Remaining calories after log:</b></p>
+				<div id="remainingCaloriesProtein"></div>
+				<div id="remainingCaloriesCarbs"></div>
+				<div id="remainingCaloriesFats"></div>
 				`
 			}
 		}
@@ -162,7 +204,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	const renderName = (user) => {
 		const navBar = document.querySelector("#navBarName")
-		navBar.textContent = user.name
+		navBar.innerHTML = `
+		<h1>
+			<img src="src/gitfitlogo.png" width="45px" height="45px"  alt="">
+			Git Fit. Git Commit.
+			Logged in as: ${user.name}
+		</h1>
+		`
 	}
 
 	const getExercises = () => {
@@ -296,23 +344,22 @@ document.addEventListener("DOMContentLoaded", function() {
 			const fullBodySample2 = random_exercises(fullBody)
 		
 			workoutDiv.innerHTML = `
-			<h1 class="card-title" style="text-align:center;">Workout Tracker:</h1 >
-			<hr>
-			<h5 style="text-align:center;">${n}</h5>
-			<hr>
-			<h4 style="text-align:center;"> <b> Rest for 3 minutes after each set!</b> </h4>
-			<hr>
-			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
-			<br>
-			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
-			<br>
-			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 2 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
-			<br>
-			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
-			<br>
-			<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample2.id}"><b class="workout-p" data-exercise-id="${fullBodySample2.id}">${fullBodySample2.exercise}</b>: 1 Set until failure </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
-			<br>
-
+				<h1 class="card-title" style="text-align:center;">Workout Tracker</h1 >
+				<hr>
+				<h5 style="text-align:center;">${n}</h5>
+				<hr>
+				<h4 style="text-align:center;"> <b> Rest for 3 minutes after each set!</b> </h4>
+				<hr>
+				<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
+				<br>
+				<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
+				<br>
+				<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 2 Sets - 6-10 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
+				<br>
+				<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
+				<br>
+				<button type="button" data-toggle="modal" data-target="#exerciseModal" style="background: none; border: none" class="workout-p" data-exercise-id="${fullBodySample2.id}"><b class="workout-p" data-exercise-id="${fullBodySample2.id}">${fullBodySample2.exercise}</b>: 1 Set until failure </button> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
+				<br>
 			`
 			workoutDiv.appendChild(workout)
 		} else if (n === "Friday"){
@@ -332,21 +379,21 @@ document.addEventListener("DOMContentLoaded", function() {
 			const coreSample = random_exercises(core)
 			
 			workoutDiv.innerHTML = `
-			<h1 class="card-title" style="text-align:center;">Workout Tracker:</h1 >
+			<h1 class="card-title" style="text-align:center;">Workout Tracker</h1 >
 			<hr>
 			<h5 style="text-align:center;">${n}</h5>
 			<hr>
 			<h4 style="text-align:center;"> <b>Rest for 1 minute after each set!</b> </h4>
 			<hr>
-			<p style="text-align:center;" class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> <button type="button" class="btn btn-outline-dark btn-sm">Done?</button>
+			<p style="text-align:center;" class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 3 Sets - 6-10 Reps each </p> Done? <input type="checkbox" id="done?"> 
 			<hr>
-			<p style="text-align:center;" class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> <button type="button" class="btn btn-outline-dark btn-sm">Done?</button>
+			<p style="text-align:center;" class="workout-p" data-exercise-id="${coreSample.id}"><b class="workout-p" data-exercise-id="${coreSample.id}">${coreSample.exercise}</b>: 3 Sets - 6-10 Reps each </p> Done? <input type="checkbox" id="done?">
 			<hr>
-			<p style="text-align:center;" class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> <button type="button" class="btn btn-outline-dark btn-sm" >Done?</button>
+			<p style="text-align:center;" class="workout-p" data-exercise-id="${backSample.id}"><b class="workout-p" data-exercise-id="${backSample.id}">${backSample.exercise}</b>: 2 Sets - 6-10 Reps each </p> Done? <input type="checkbox" id="done?"> 
 			<hr>
-			<p style="text-align:center;" class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p> <button type="button" class="btn btn-outline-dark btn-sm">Done?</button>
+			<p style="text-align:center;" class="workout-p" data-exercise-id="${armsSample.id}"><b class="workout-p" data-exercise-id="${armsSample.id}">${armsSample.exercise}</b>: 2 Sets - 10-12 Reps each </p> Done? <input type="checkbox" id="done?">
 			<hr>
-			<p style="text-align:center;" class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 1 Set until failure </p> <button type="button" class="btn btn-outline-dark btn-sm">Done?</button>
+			<p style="text-align:center;" class="workout-p" data-exercise-id="${legsSample.id}"><b class="workout-p" data-exercise-id="${legsSample.id}">${legsSample.exercise}</b>: 1 Set until failure </p> Done? <input type="checkbox" id="done?"> 
 
 			`
 			workoutDiv.appendChild(workout)
@@ -400,21 +447,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		// }
 	}
 
-
-	// const renderExercise = exercise => {
-	// 	const exDiv = document.createElement("div")
-	// 	exDiv.classList.add("card")
-
-	// 	exDiv.innerHTML = `
-	// 	<h1>${exercise.exercise}</h1>
-	// 	<br>
-	// 	<img src="${exercise.example}">
-	// 	`
-
-	// 	mainDiv = document.querySelector(".mainDiv")
-	// 	mainDiv.appendChild(exDiv)
-	// }
-
 	const getUser = () => {
 		fetch(userUrl)
 		.then(response => response.json())
@@ -437,16 +469,16 @@ document.addEventListener("DOMContentLoaded", function() {
 		`
 	}
 
-	const submitHandler = () => {
-		document.addEventListener('submit', e => {
+	const modalHandler = () => {
+		const form = document.querySelector("#weightInput")
+		form.addEventListener('submit', e => {
 			e.preventDefault()
 			if(e.target.matches("#weightInput")) {
-				const weightForm = document.getElementById('weightInput')
 				console.log(e.target)
-				const currentWeight = weightForm.currentweight.value
-				const img = weightForm.image.value
-				const notes = weightForm.notes.value
-				weightForm.reset()
+				const currentWeight = form.currentweight.value
+				const img = form.image.value
+				const notes = form.notes.value
+				form.reset()
 
 				fetch(userUrl)
 				.then(response => response.json())
@@ -457,7 +489,14 @@ document.addEventListener("DOMContentLoaded", function() {
 					
 				})
 
-			} else if(e.target.matches("#caloriesInput")) {
+			} 
+		})
+	}
+
+	const calorieHandler = () => {
+		document.addEventListener('submit', e => {
+			e.preventDefault();
+			if(e.target.matches("#caloriesInput")) {
 			
 				const macrosForm = document.getElementById('caloriesInput')
 				const proteinInput = macrosForm.protein.value
@@ -469,6 +508,9 @@ document.addEventListener("DOMContentLoaded", function() {
 			} 
 		})
 	}
+
+
+
 
 	const addCurrentWeight = (currentWeightArray, img, notes) => {
 		const options = {
@@ -491,56 +533,56 @@ document.addEventListener("DOMContentLoaded", function() {
 				})
 	}
 
-	const renderChart = () => {
-	const ctx = document.getElementById('myChart');
-			const myChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: [],
-					datasets: [{
-						label: 'Current Weight',
-						data: [],
-						backgroundColor: [
-							'rgba(255, 99, 132, 0.2)',
-							'rgba(54, 162, 235, 0.2)',
-							'rgba(255, 206, 86, 0.2)',
-							'rgba(75, 192, 192, 0.2)',
-							'rgba(153, 102, 255, 0.2)',
-							'rgba(255, 159, 64, 0.2)'
-						],
-						borderColor: [
-							'rgba(255, 99, 132, 1)',
-							'rgba(54, 162, 235, 1)',
-							'rgba(255, 206, 86, 1)',
-							'rgba(75, 192, 192, 1)',
-							'rgba(153, 102, 255, 1)',
-							'rgba(255, 159, 64, 1)'
-						],
-						borderWidth: 1
-					}]
-				},
-				options: {
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero: true
-							}
-						}]
-					}
-				}
-			});
+	// const renderChart = () => {
+	// const ctx = document.getElementById('myChart');
+	// 		const myChart = new Chart(ctx, {
+	// 			type: 'line',
+	// 			data: {
+	// 				labels: [],
+	// 				datasets: [{
+	// 					label: 'Current Weight',
+	// 					data: [],
+	// 					backgroundColor: [
+	// 						'rgba(255, 99, 132, 0.2)',
+	// 						'rgba(54, 162, 235, 0.2)',
+	// 						'rgba(255, 206, 86, 0.2)',
+	// 						'rgba(75, 192, 192, 0.2)',
+	// 						'rgba(153, 102, 255, 0.2)',
+	// 						'rgba(255, 159, 64, 0.2)'
+	// 					],
+	// 					borderColor: [
+	// 						'rgba(255, 99, 132, 1)',
+	// 						'rgba(54, 162, 235, 1)',
+	// 						'rgba(255, 206, 86, 1)',
+	// 						'rgba(75, 192, 192, 1)',
+	// 						'rgba(153, 102, 255, 1)',
+	// 						'rgba(255, 159, 64, 1)'
+	// 					],
+	// 					borderWidth: 1
+	// 				}]
+	// 			},
+	// 			options: {
+	// 				scales: {
+	// 					yAxes: [{
+	// 						ticks: {
+	// 							beginAtZero: true
+	// 						}
+	// 					}]
+	// 				}
+	// 			}
+	// 		});
 
 			
-			renderUser();
-		}
+	// 		renderUser();
+	// 	}
 
-	const renderUser = () => {
-		fetch(userUrl)
-		.then(response => response.json())
-		.then(user => {
-			myChart.data["datasets"]["data"] = user.currentWeight
-		})
-	}
+	// const renderUser = () => {
+	// 	fetch(userUrl)
+	// 	.then(response => response.json())
+	// 	.then(user => {
+	// 		myChart.data["datasets"]["data"] = user.currentWeight
+	// 	})
+	// }
 
 	const addCurrentWeightLi = (user, img, notes) => {
 		const weightUl = document.querySelector(".weightUl")
@@ -553,6 +595,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		weightUl.append(newLi)
 		
 		renderProgressCard(user, img, notes)
+		renderChart
 	}
 
 	const renderProgressCard = (user, img, notes) => {
@@ -581,27 +624,23 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	const updateMacros = (proteinInput, carbsInput, fatsInput) => {
-		let protein = parseInt(document.querySelector(".protein").innerText)
+		const calorieInformation = document.querySelector("#calorieInformation")
+		let dailyCalories = parseInt(document.querySelector("#dailyCalories").innerText)
+		
 		let proteinInputInt = parseInt(proteinInput)
-		let carbs = parseInt(document.querySelector(".carbs").innerText)
 		let carbsInputInt = parseInt(carbsInput)
-		let fats = parseInt(document.querySelector(".fats").innerText)
 		let fatsInputInt = parseInt(fatsInput)
+		const dailyProtein = parseInt(document.getElementById("dailyProteinPTag").innerText)
+		const dailyCarbs = parseInt(document.getElementById("dailyCarbsPTag").innerText)
+		const dailyFats = parseInt(document.getElementById("dailyFatsPTag").innerText)
 
+			let roundedProtein = Math.round(dailyProtein - proteinInputInt)
+			let roundedCarbs = Math.round(dailyCarbs - carbsInputInt)
+			let roundedFats = Math.round(dailyFats - fatsInputInt)
 
-		document.querySelector(".protein").innerHTML = `${protein - proteinInputInt}g Protein`
-		document.querySelector(".carbs").innerHTML = `${carbs - carbsInputInt}g Carbs`
-		document.querySelector(".fats").innerHTML = `${fats - fatsInputInt}g Fats`
-		
-		let totalCalories = parseInt(document.getElementById("calories").textContent)
-		
-		let caloriesFromCarbs = carbsInputInt * 4
-		let caloriesFromFats = fatsInputInt * 9
-		let caloriesFromProtein = proteinInputInt * 4
-		
-		let caloriesFromMacrosSum = caloriesFromCarbs + caloriesFromFats + caloriesFromProtein
-
-		document.getElementById("calories").textContent = totalCalories - caloriesFromMacrosSum
+		document.querySelector("#dailyProteinPTag").innerHTML = `${roundedProtein}g Protein`
+		document.querySelector("#dailyCarbsPTag").innerHTML = `${roundedCarbs}g Carbs`
+		document.querySelector("#dailyFatsPTag").innerHTML = `${roundedFats}g Fats`
 
 	}
 
@@ -615,39 +654,54 @@ document.addEventListener("DOMContentLoaded", function() {
 				removeWeightUl.lastElementChild.remove()
 				document.querySelector("#progressDiv").lastElementChild.remove()
 
-			} else if (e.target.matches(`[data-target="#weightModal"]`)) {
-				console.log(e.target)
+			} else if (e.target.matches('.workout-p')) {
+				const exerciseClickId = e.target.dataset.exerciseInfoDiv
+				console.log(exerciseClickId)
 			}
 
 		})
 	}
 
-	// const renderExerciseInfo = exercise => {
-	// 	exerciseInfoDiv.innerHTML = `
-	// 		<div class="modal-fade" id="exerciseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	// 			<div class="modal-dialog modal-dialog-centered" role="document">
-	// 				<div class="modal-content">
-	// 					<div class="modal-header">
-	// 						<h5 class="modal-title" id="exampleModalLongTitle">${exercise.exercise}</h5>
-	// 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	// 							<span aria-hidden="true">&times;</span>
-	// 						</button>
-	// 					</div>
-	// 					<div class="modal-body">
-	// 					<img src="${exercise.example}">
-	// 					<p>${exercise.exerciseType}</p>
-	// 					<p>${exercise.equipment}</p>
-	// 					<p>${exercise.majorMuscle}</p>
-	// 					<p>${exercise.minorMuscle}</p>
-	// 					<p>${exercise.notes}</p>
-	// 					<p>${exercise.modifications}</p>
-	// 					</div>
-	// 				<div class="modal-footer">
-	// 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	// 				</div>
-	// 		</div>
-	// 		`
-	// }
+	const renderExercise = exercise => {
+		const exDiv = document.createElement("div")
+		exDiv.classList.add("card")
+
+		exDiv.innerHTML = `
+		<h1>${exercise.exercise}</h1>
+		<br>
+		<img src="${exercise.example}">
+		`
+
+		mainDiv = document.querySelector(".mainDiv")
+		mainDiv.appendChild(exDiv)
+	}
+
+	const renderExerciseInfo = exercise => {
+		exerciseInfoDiv.innerHTML = `
+			<div class="modal-fade" id="exerciseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">${exercise.exercise}</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+						<img src="${exercise.example}">
+						<p>${exercise.exerciseType}</p>
+						<p>${exercise.equipment}</p>
+						<p>${exercise.majorMuscle}</p>
+						<p>${exercise.minorMuscle}</p>
+						<p>${exercise.notes}</p>
+						<p>${exercise.modifications}</p>
+						</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+			</div>
+			`
+	}
 
 	$("#navbar_register_btn").on("click",function(e){
 		e.preventDefault();
@@ -661,7 +715,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	logInHandler();
 	clickHandler();
-	submitHandler();
+	modalHandler();
+	calorieHandler();
 	getExercises();
 	getUser();
 })
