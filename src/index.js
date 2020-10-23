@@ -1,43 +1,174 @@
-
-
 document.addEventListener("DOMContentLoaded", function() {
 	const exUrl = "http://localhost:3000/exercises/"
 	const userUrl = "http://localhost:3000/users/1"
-
 	let d = new Date()
-	
 	let weekday = new Array(14);
-	weekday[0] = "Sunday";
-	weekday[1] = "Monday";
-	weekday[2] = "Tuesday";
-	weekday[3] = "Wednesday";
-	weekday[4] = "Thursday";
-	weekday[5] = "Friday";
-	weekday[6] = "Saturday";
-	weekday[7] = "Sunday";
-	weekday[8] = "Monday";
-	weekday[9] = "Tuesday";
-	weekday[10] = "Wednesday";
-	weekday[11] = "Thursday";
-	weekday[12] = "Friday";
-	weekday[13] = "Saturday";
-
-	
+			weekday[0] = "Sunday";
+			weekday[1] = "Monday";
+			weekday[2] = "Tuesday";
+			weekday[3] = "Wednesday";
+			weekday[4] = "Thursday";
+			weekday[5] = "Friday";
+			weekday[6] = "Saturday";
+			weekday[7] = "Sunday";
+			weekday[8] = "Monday";
+			weekday[9] = "Tuesday";
+			weekday[10] = "Wednesday";
+			weekday[11] = "Thursday";
+			weekday[12] = "Friday";
+			weekday[13] = "Saturday";
 	let n = weekday[d.getDay()];
 	let tomorrow = weekday[d.getDay() + 1]
 	let dayAfterTomorrow = weekday[d.getDay() + 2]
 	let threeDaysAfter = weekday[d.getDay() + 3]
-	
 	let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Oct.", "November", "December"]	
 	function addDarkmodeWidget() {
 		new Darkmode().showWidget();
-	}
+		}
 	window.addEventListener('load', addDarkmodeWidget);
+// 
+// 
+// 
 
+	const logInHandler = () => {
+		const home = document.querySelector("#userForm")
+		home.addEventListener('submit', e => {
+			e.preventDefault();
+			form = e.target
+			// Attributes
+			const name = form.name.value
+			const age = form.age.value
+			const height = form.height.value
+			const startingWeight = form.sw.value
+			const goalWeight = form.gw.value
+			const skillLevelDropDown = document.getElementById("skillLevelInput");
+			const skillLevel = skillLevelDropDown.value;
+			const equipmentArray = []
+			const sexArray = []
+			const activityLevelArray = []
+			document.getElementsByName("sex").forEach(radio => {
+				if(radio.checked) {
+					sexArray.push(radio.value)
+				}
+			})
+			document.getElementsByName("equipment").forEach(radio => {
+				if(radio.checked) {
+					equipmentArray.push(radio.value)
+				}
+			})
+			document.getElementsByName("activityLevel").forEach(radio => {
+				if(radio.checked) {
+					activityLevelArray.push(radio.value)
+				}
+			})
+			
+			const sexValue = sexArray[0]
+			const equipmentValue = equipmentArray[0]
+			const activityLevelValue = activityLevelArray[0]
+
+			const goalDropDown = document.getElementById("goalInput");
+			const goalValue = parseInt(goalDropDown.value)
+			const goalContent = goalDropDown.options[goalDropDown.selectedIndex].textContent
+
+			calculateCalories(sexValue, startingWeight, height, age, activityLevelValue, goalValue, goalContent);
+
+			form.reset()
+
+			const newUser = { 
+				name: name, 
+				sex: sexValue, 
+				age: age, 
+				startingWeight: startingWeight,
+				currentWeight: [startingWeight], 
+				goalWeight: goalWeight, 
+				macros: "protein",
+				skillLevel: skillLevel, 
+				equipment: equipmentValue }
+
+			const options = {
+				method: "PATCH",
+				headers: {
+					"content-type": "application/json",
+					"accept": "application/json"
+				},
+				body: JSON.stringify(newUser)
+			}
+
+			fetch(userUrl, options)
+			.then(response => response.json())
+			.then(user => {
+				getUser(user)
+			})	
+		}
+	)}
+
+	const calculateCalories = (sexValue, startingWeight, height, age, activityLevelValue, goalValue, goalContent) => {
+		const calorieInformation = document.querySelector("#calorieInformation")
+		const startingWeightParsed = parseInt(startingWeight)
+		if(sexValue === "male") {
+			const unrounded = (10*startingWeightParsed*0.453592)+((6.25*height)-(5*age+5))
+			const rounded = Math.round(unrounded / 10) * 10;
+			const tdee = rounded*activityLevelValue
+			if(goalContent === "Lose Weight"){
+				calorieInformation.innerHTML = `
+				<h5>Suggested Daily Calories For ${goalContent} </h5>
+				<h4 id="dailyCalories">${tdee+goalValue}</h4>
+				<hr>
+				<p><b>Remaining calories after log:</b></p>
+				<p id="remainingCalories"></p>
+				`
+			} else if(goalContent === "Maintain Weight"){
+				calorieInformation.innerHTML = `
+				<h5>Suggested Daily Calories For ${goalContent} </h5>
+				<h4 id="dailyCalories">${tdee+goalValue}</h4>
+				<hr>
+				<p><b>Remaining calories after log:</b></p>
+				<p id="remainingCalories"></p>
+				`
+			} else if(goalContent === "Gain Muscle"){
+				calorieInformation.innerHTML = `
+				<h5>Suggested Daily Calories For ${goalContent} </h5>
+				<h4 id="dailyCalories">${tdee+goalValue}</h4>
+				<hr>
+				<p><b>Remaining calories after log:</b></p>
+				<p id="remainingCalories"></p>
+				`
+			}
+		} else if(sexValue === "female") {
+			const unrounded = (10*startingWeightParsed*0.453592)+((6.25*height)-(5*age-161))
+			const rounded = Math.round(unrounded / 10) * 10;
+			const tdee = rounded*activityLevelValue
+			if(goalContent === "Lose Weight"){
+				calorieInformation.innerHTML = `
+				<h5>Suggested Daily Calories For ${goalContent} </h5>
+				<h4 id="dailyCalories">${tdee+goalValue}</h4>
+				<hr>
+				<p><b>Remaining calories after log:</b></p>
+				<p id="remainingCalories"></p>
+				`
+			} else if(goalContent === "Maintain Weight"){
+				calorieInformation.innerHTML = `
+				<h5>Suggested Daily Calories For ${goalContent} </h5>
+				<h4 id="dailyCalories">${tdee+goalValue}</h4>
+				<hr>
+				<p><b>Remaining calories after log:</b></p>
+				<p id="remainingCalories"></p>
+				`
+			} else if(goalContent === "Gain Muscle"){
+				calorieInformation.innerHTML = `
+				<h5>Suggested Daily Calories For ${goalContent} </h5>
+				<h4 id="dailyCalories">${tdee+goalValue}</h4>
+				<hr>
+				<p><b>Remaining calories after log:</b></p>
+				<p id="remainingCalories"></p>
+				`
+			}
+		}
+	}
 
 	const renderName = (user) => {
 		const navBar = document.querySelector("#navBarName")
-		navBar.innerText = user.name
+		navBar.textContent = user.name
 	}
 
 	const getExercises = () => {
@@ -254,11 +385,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			<p class="workout-p" data-exercise-id="${fullBodySample1.id}"><b class="workout-p" data-exercise-id="${fullBodySample1.id}">${fullBodySample1.exercise}</b>: 2 Sets - 10-12 Reps each </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
 			<p class="workout-p" data-exercise-id="${legsSample2.id}"><b class="workout-p" data-exercise-id="${legsSample2.id}">${legsSample2.exercise}</b>: 1 Set until failure </p> <input type="checkbox" id="accept"> <span class="badge badge-pill badge-dark">Done?</span>
 			<br>
-			<ul class="pagination pagination-sm justify-content-end" style="margin:20px 0">
-				<li class="page-item" ><a id="prev-btn" class="page-link" href="#">Previous</a></li>
-			
-				<li class="page-item" ><a id="next-btn" class="page-link" href="#">Next</a></li>
-			</ul>
 			`
 			workoutDiv.appendChild(workout)
 		} else {
@@ -345,60 +471,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				macrosForm.reset()
 
 				updateMacros(proteinInput, carbsInput, fatsInput)
-			} else if(e.target.matches("#mainForm")) {
-				e.preventDefault();
-				form = e.target
-				// Attributes
-				const name = form.name.value
-				const age = form.age.value
-				const startingWeight = form.sw.value
-				const goalWeight = form.gw.value
-				const skillLevelDropDown = document.getElementById("skillLevelInput");
-				const skillLevel = skillLevelDropDown.value;
-				const equipmentArray = []
-				const sexArray = []
-
-				document.getElementsByName("sex").forEach(radio => {
-					if(radio.checked) {
-						sexArray.push(radio.value)
-					}
-				})
-
-
-				document.getElementsByName("equipment").forEach(radio => {
-					if(radio.checked) {
-						equipmentArray.push(radio.value)
-					}
-				})
-				
-				const sexValue = sexArray[0]
-				const equipmentValue = equipmentArray[0]
-
-				form.reset()
-				const newUser = { 
-					name: name, 
-					sex: sexValue, 
-					age: age, 
-					startingWeight: startingWeight,
-					currentWeight: [startingWeight], 
-					goalWeight: goalWeight, 
-					macros: "protein",
-					skillLevel: skillLevel, 
-					equipment: equipmentValue }
-
-				const options = {
-					method: "PATCH",
-					headers: {
-						"content-type": "application/json",
-						"accept": "application/json"
-					},
-					body: JSON.stringify(newUser)
-				}
-
-				fetch(userUrl, options)
-				.then(response => response.json())
-				.then(getUser())	
-			}
+			} 
 		})
 	}
 
@@ -551,17 +624,6 @@ document.addEventListener("DOMContentLoaded", function() {
 		})
 	}
 
-	// if(e.target.matches(".workout-p")){
-	// 	const workout = e.target
-	// 	const exerciseId = workout.dataset.exerciseId
-	// 	console.log(exerciseId)
-		
-	// 	fetch(exUrl + exerciseId)
-	// 	.then(response => response.json())
-	// 	.then(exercise => {
-	// 		renderExerciseInfo(exercise)
-	// 	})
-	// } else 
 	// const renderExerciseInfo = exercise => {
 	// 	exerciseInfoDiv.innerHTML = `
 	// 		<div class="modal-fade" id="exerciseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -599,6 +661,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		$('#exerciseModal').modal('show');
 	})
 
+	logInHandler();
 	clickHandler();
 	submitHandler();
 	getExercises();
